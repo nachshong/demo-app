@@ -1,0 +1,6 @@
+div.post {
+    border:solid gray 1px;
+    margin: 10px;
+    text-align: left;
+    padding: 5px 15px;
+}

@@ -1,0 +1,16 @@
+<p>
+  simple-binding works!
+</p>
+<div>
+  First Name:
+  <br>
+  <input  [value]="firstName" (input)="setFirstName($event)" >
+  <br>
+  <input  [value]="firstName" (input)="update($event.target.value)" >
+  <hr>
+  Last Name:
+  <br>
+  <input  [(ngModel)]="lastName" >
+  <br>
+  <input  [(ngModel)]="lastName" >
+</div>

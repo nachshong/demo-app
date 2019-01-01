@@ -1,0 +1,12 @@
+<p>
+    student works!
+</p>
+<div>
+  New Name: <input #abc [(ngModel)]="name"  >
+  <br>
+  <button (click)="changeToDavid()">change to david</button>
+  <button (click)="changeToJosef()" >change to josef</button>
+</div>
+<div style="background-color: gray" [style.width.px]="mySize" (click)="incSize()">
+*
+</div>
