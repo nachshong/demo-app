@@ -1,0 +1,35 @@
+# initial new repository 'demo-rep'
+mkdir demo-rep
+cd demo-rep
+git init
+
+# list of branches
+git branch
+- or -
+git branch -v
+- or -
+git branch -a
+
+# list of remotes
+git remote
+- or - 
+git remote -v
+
+# add remote origin
+git remote add origin <URL>
+
+# override local repository
+git fetch 
+git reset --hard origin/master
+
+#set upstream
+git branch -u origin/master
+
+# fetch last changes from remote
+git fetch
+git merge
+
+# push last changes to remote
+git add .
+git commit
+git push
