@@ -5,14 +5,16 @@ git init
 
 # list of branches
 git branch
-- or -
+- or - (show hash and subject)
 git branch -v
-- or -
+- or - (show upstream branch also)
+git branch -vv
+- or - (show remote-tracking also)
 git branch -a
 
 # list of remotes
 git remote
-- or - 
+- or -
 git remote -v
 
 # add remote origin
@@ -25,11 +27,11 @@ git reset --hard origin/master
 #set upstream
 git branch -u origin/master
 
-# fetch last changes from remote
+# fetch all last changes from remote
 git fetch
 git merge
 
-# push last changes to remote
+# push all last changes to remote
 git add .
 git commit
 git push
