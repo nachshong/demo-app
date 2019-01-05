@@ -22,18 +22,17 @@ export class HelloServiceService {
   {
     this.counter++;
 
-    return timer(1).pipe(mapTo(this.counter + '. Hello ' + name));
+    return timer(50).pipe(mapTo(this.counter + '. Hello ' + name));
   }
 
   greeting2(name: string): Observable<string>
   {
-    var subs: Subscriber<string>;
-    var obsrv = new Observable<string>((s) => { subs = s});
+    this.counter++;
 
-    setTimeout(() => {
-      subs.next(this.counter + ". Hello " + name);
-    }, 1);
-
-    return obsrv;
+    return new Observable<string>((s) => { 
+      setTimeout(() => {
+        s.next(this.counter + ". Hello " + name);
+      }, 50);
+    });
   }
 }

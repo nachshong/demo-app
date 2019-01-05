@@ -22,9 +22,7 @@ export class HelloServiceComponent implements OnInit {
   greet()
   {
     this.counter.inc();
-    this.srv.greeting(this.name).subscribe((msg: string ) => { this.displayGreet(msg) });
-
-    //this.greeting = this.name;
+    this.srv.greeting2(this.name).subscribe((msg: string ) => { this.displayGreet(msg) });
   }
 
   displayGreet(message: string)
