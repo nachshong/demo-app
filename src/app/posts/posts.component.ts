@@ -21,7 +21,10 @@ export class PostsComponent implements OnInit {
 
   ngOnInit() {
     this.newPost = new Post();
+    this.load();
+  }
 
+  load() {
     this.postService.getUsers().subscribe(
       (value) => { value.forEach((s: any) => { this.users[s.id] = s}) }
     );
@@ -62,5 +65,14 @@ export class PostsComponent implements OnInit {
         console.log(s) 
       }
     );
+  }
+
+  get isDbLocal(): boolean {
+    return this.postService.getDbLocal();
+  }
+
+  set isDbLocal(value: boolean) {
+    this.postService.setDbLocal(value);
+    this.load();
   }
 }

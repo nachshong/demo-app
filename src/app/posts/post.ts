@@ -10,7 +10,7 @@ export class Post {
         this.userId = userId;
         this.title = title;
         this.body = body;
-        this._version = version || 1;
+        this._version = version || 0;
     }
 
     get id(): number {
@@ -54,8 +54,8 @@ export class Post {
         return this._version;
     }
     set version(value: number) {
-        if (value <= 0)
-            throw new Error("version must be a positive number");
+        if (value < 0)
+            throw new Error("version must be a natural number");
 
         this._version = value;
     }
