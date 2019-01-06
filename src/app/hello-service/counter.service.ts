@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HelloServiceComponent } from './hello-service.component';
 
 @Injectable()
-export class CounterServiceService {
+export class CounterService {
 
   value: number;
 

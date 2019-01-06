@@ -1,10 +1,25 @@
 <p>
   posts works!
 </p>
-<input (input)="filter($event.target.value)" >
+<div>
+  User ID: <input [(ngModel)]="newPost.userId"/> <br>
+  Title: <input [(ngModel)]="newPost.title"/> <br>
+  Body: <input [(ngModel)]="newPost.body"/> <br>
+  <button (click)="addPost()">Create</button>
+</div>
+<br>
+<hr>
+filter: <input (input)="filter($event.target.value)" >
 <br>
 <div class="post" *ngFor="let item of posts | postsByUser: userId" >
-  <h3>[{{item.id}}] &nbsp; {{item.title}}</h3>  
-  <p dir="rtl">{{item.body}}</p>
+  <!--<h3>[{{item.id}}] &nbsp; {{item.title}}</h3>-->
+  <input [(ngModel)]="item.title">
+  <br>
+  <textarea [(ngModel)]="item.body" dir="rtl"></textarea>
+  <br>
   <cite>{{users[item.userId]?.name}}</cite>
+  <br>
+  <button (click)="editPost(item)">Edit</button>
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+  <button (click)="deletePost(item.id)">Delete</button>
 </div>
