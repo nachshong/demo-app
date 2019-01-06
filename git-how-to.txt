@@ -28,6 +28,8 @@ git reset --hard origin/master
 git branch -u origin/master
 
 # fetch all last changes from remote
+git pull
+- or -
 git fetch
 git merge
 
@@ -35,3 +37,7 @@ git merge
 git add .
 git commit
 git push
+
+# fix last commit author after push
+git commit --amend --reset-author
+git push --force
