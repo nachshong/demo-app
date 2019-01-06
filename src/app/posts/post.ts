@@ -3,12 +3,14 @@ export class Post {
     private _userId: number;
     private _title: string;
     private _body: string;
+    private _version: number;
 
-    constructor (id?: number, userId?: number, title?: string, body?: string) {
+    constructor (id?: number, userId?: number, title?: string, body?: string, version?: number) {
         this.id = id;
         this.userId = userId;
         this.title = title;
         this.body = body;
+        this._version = version || 1;
     }
 
     get id(): number {
@@ -46,5 +48,15 @@ export class Post {
     }
     set body(value: string) {
         this._body = value;
+    }
+
+    get version(): number {
+        return this._version;
+    }
+    set version(value: number) {
+        if (value <= 0)
+            throw new Error("version must be a positive number");
+
+        this._version = value;
     }
 }

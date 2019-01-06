@@ -3,7 +3,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Post } from './post'
 
 @Pipe({
-  name: 'postsByUser'
+  name: 'postsByUser',
+  pure: false
 })
 export class PostsByUserPipe implements PipeTransform {
 

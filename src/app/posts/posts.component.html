@@ -12,7 +12,8 @@
 filter: <input (input)="filter($event.target.value)" >
 <br>
 <div class="post" *ngFor="let item of posts | postsByUser: userId" >
-  <!--<h3>[{{item.id}}] &nbsp; {{item.title}}</h3>-->
+  <h4>[{{item.id}}] <small>(version {{item.version}})</small></h4>
+  <h3>{{item.title}}</h3>
   <input [(ngModel)]="item.title">
   <br>
   <textarea [(ngModel)]="item.body" dir="rtl"></textarea>

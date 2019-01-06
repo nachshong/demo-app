@@ -38,20 +38,29 @@ export class PostsComponent implements OnInit {
 
   addPost() {
     this.postService.addPost(this.newPost).subscribe(
-      s => { console.log(s) }
+      s => { 
+        this.posts.push(s);
+        console.log(s) 
+      }
     );
   }
 
   editPost(post: Post) {
     this.postService.editUser(post).subscribe(
-      s => { console.log(s) }
+      s => { 
+        Object.assign(post, s);
+        console.log(s) 
+      }
     );
   }
 
   deletePost(id: number)
   {
     this.postService.deleteUser(id).subscribe(
-      s => { console.log(s) }
+      s => { 
+        this.posts.splice(this.posts.findIndex(i => i.id == id), 1);
+        console.log(s) 
+      }
     );
   }
 }
