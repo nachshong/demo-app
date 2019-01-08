@@ -12,7 +12,7 @@ import { SimpleBindingComponent } from './simple-binding/simple-binding.componen
 import { HelloServiceComponent } from './hello-service/hello-service.component';
 import { HomeComponent } from './home/home.component';
 import { PostsComponent } from './posts/posts.component';
-import { PostsByUserPipe } from './posts/posts-by-user.pipe';
+import { PostsFilterPipe } from './posts/posts-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,7 @@ import { PostsByUserPipe } from './posts/posts-by-user.pipe';
     HelloServiceComponent,
     HomeComponent,
     PostsComponent,
-    PostsByUserPipe
+    PostsFilterPipe
   ],
   imports: [
     BrowserModule,

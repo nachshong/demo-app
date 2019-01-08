@@ -1,8 +1,8 @@
-import { PostsByUserPipe } from './posts-by-user.pipe';
+import { PostsFilterPipe } from './posts-filter.pipe'
 
 describe('PostsByUserPipe', () => {
   it('create an instance', () => {
-    const pipe = new PostsByUserPipe();
+    const pipe = new PostsFilterPipe();
     expect(pipe).toBeTruthy();
   });
 });

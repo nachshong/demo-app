@@ -12,7 +12,6 @@ export class PostsComponent implements OnInit {
 
   posts: Array<Post>;
   users: Object;
-  userId: number;
   newPost: Post;
 
   constructor(private postService: PostsService) { 
@@ -32,11 +31,6 @@ export class PostsComponent implements OnInit {
     this.postService.getPosts().subscribe(
       (value) => { this.posts = value }
     );
-  }
-
-  filter(userId: number)
-  {
-    this.userId = userId;
   }
 
   addPost() {

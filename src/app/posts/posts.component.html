@@ -4,7 +4,7 @@
 <p>
   <label><input type="checkbox" [(ngModel)]="isDbLocal" /> Use local DB.</label>
 </p>
-<div>
+<div style="text-align: left">
   User ID: <input [(ngModel)]="newPost.userId"/> <br>
   Title: <input [(ngModel)]="newPost.title"/> <br>
   Body: <input [(ngModel)]="newPost.body"/> <br>
@@ -12,18 +12,25 @@
 </div>
 <br>
 <hr>
-filter: <input (input)="filter($event.target.value)" >
+<div style="text-align: left">
+  <strong>Filters: </strong>&nbsp; &nbsp; &nbsp;
+  User ID: <input [(ngModel)]="filterUserId" >&nbsp; &nbsp;
+  Title: <input [(ngModel)]="filterTitle">&nbsp; &nbsp;
+  Body: <input [(ngModel)]="filterBody">&nbsp; &nbsp;
+</div>
+<hr>
 <br>
-<div class="post" *ngFor="let item of posts | postsByUser: userId" >
-  <h4>[{{item.id}}] <small>(version {{item.version}})</small></h4>
+<div class="post" *ngFor="let item of posts | postsFilter: filterUserId:filterTitle:filterBody" >
+  <h4>[{{item.id}}] <small>version {{item.version}}</small></h4>
   <h3>{{item.title}}</h3>
-  <input [(ngModel)]="item.title">
+  <p>{{item.body}}</p>
+  <p><cite>{{users[item.userId]?.name}}</cite></p>
   <br>
-  <textarea [(ngModel)]="item.body" dir="rtl"></textarea>
-  <br>
-  <cite>{{users[item.userId]?.name}}</cite>
-  <br>
-  <button (click)="editPost(item)">Edit</button>
-  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-  <button (click)="deletePost(item.id)">Delete</button>
+  <fieldset>
+    <input [(ngModel)]="item.title"><br>
+    <textarea [(ngModel)]="item.body" dir="rtl"></textarea><br>
+    <button (click)="editPost(item)">Edit</button>
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    <button (click)="deletePost(item.id)">Delete</button>
+  </fieldset>
 </div>
