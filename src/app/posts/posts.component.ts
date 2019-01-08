@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+import { UrlService } from '../url.service';
 import { PostsService } from './posts.service'
 import { Post } from './post'
+import { UsersService } from '../users/users.service';
 
 @Component({
   selector: 'app-posts',
@@ -14,7 +16,7 @@ export class PostsComponent implements OnInit {
   users: Object;
   newPost: Post;
 
-  constructor(private postService: PostsService) { 
+  constructor(private postService: PostsService, private usersService: UsersService, private urlService: UrlService) { 
     this.users = new Object();
   }
 
@@ -24,12 +26,12 @@ export class PostsComponent implements OnInit {
   }
 
   load() {
-    this.postService.getUsers().subscribe(
-      (value) => { value.forEach((s: any) => { this.users[s.id] = s}) }
+    this.usersService.getUsers().subscribe(
+      list => { list.forEach(s => { this.users[s.id] = s}) }
     );
 
     this.postService.getPosts().subscribe(
-      (value) => { this.posts = value }
+      list => { this.posts = list }
     );
   }
 
@@ -61,12 +63,11 @@ export class PostsComponent implements OnInit {
     );
   }
 
-  get isDbLocal(): boolean {
-    return this.postService.getDbLocal();
+  get isLocalDB(): boolean {
+    return this.urlService.isLocalDb;
   }
-
-  set isDbLocal(value: boolean) {
-    this.postService.setDbLocal(value);
+  set isLocalDB(value: boolean) {
+    this.urlService.isLocalDb = value;
     this.load();
   }
 }

@@ -3,21 +3,15 @@ import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators';
 
+import { UrlService } from '../url.service'
 import { Post } from './post'
-
-const API_URL_PLACE: string = 'https://jsonplaceholder.typicode.com'
-const API_URL_LOCAL: string = 'http://localhost:3000'
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostsService {
 
-  private serviceUrl: string;
-
-  constructor(private httpClient: HttpClient)  { 
-    this.serviceUrl = API_URL_PLACE;
-  }
+  constructor(private httpClient: HttpClient, private urlService: UrlService)  { }
 
   private mapToRemotePost(post: Post): any {
     return { id: post.id, userId: post.userId, title: post.title, body: post.body, version: post.version + 1 };
@@ -28,38 +22,27 @@ export class PostsService {
   }
 
   getPosts(): Observable<Array<Post>> {
-    return this.httpClient.get<Array<any>>(this.serviceUrl + '/posts')
+    return this.httpClient.get<Array<any>>(this.urlService.baseURL + '/posts')
       .pipe(map(list => list.map(this.mapToLocalPost)));
   }
 
   addPost(post: Post): Observable<Post> {
     var value = this.mapToRemotePost(post);
     
-    return this.httpClient.post(this.serviceUrl + '/posts', value)
+    return this.httpClient.post(this.urlService.baseURL + '/posts', value)
       .pipe(map(this.mapToLocalPost));
   }
 
   editUser(post: Post): Observable<Post> {
     var value = this.mapToRemotePost(post);
 
-    return this.httpClient.put(this.serviceUrl + '/posts/' + post.id, value)
+    return this.httpClient.put(this.urlService.baseURL + '/posts/' + post.id, value)
       .pipe(map(this.mapToLocalPost));
   }
 
   deleteUser(id: number)
   {
-    return this.httpClient.delete(this.serviceUrl + '/posts/' + id);
+    return this.httpClient.delete(this.urlService.baseURL + '/posts/' + id);
   }
 
-  getUsers() {
-    return this.httpClient.get<Array<Object>>(this.serviceUrl + '/users');
-  }
-
-  setDbLocal(value: boolean) {
-    this.serviceUrl = value ? API_URL_LOCAL : API_URL_PLACE;
-  }
-
-  getDbLocal() : boolean {
-    return this.serviceUrl == API_URL_LOCAL;
-  }
 }

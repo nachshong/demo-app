@@ -13,6 +13,7 @@ import { HelloServiceComponent } from './hello-service/hello-service.component';
 import { HomeComponent } from './home/home.component';
 import { PostsComponent } from './posts/posts.component';
 import { PostsFilterPipe } from './posts/posts-filter.pipe';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { PostsFilterPipe } from './posts/posts-filter.pipe';
     HelloServiceComponent,
     HomeComponent,
     PostsComponent,
-    PostsFilterPipe
+    PostsFilterPipe,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
