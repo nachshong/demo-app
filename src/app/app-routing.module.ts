@@ -7,6 +7,7 @@ import { SimpleBindingComponent } from './simple-binding/simple-binding.componen
 import { HelloServiceComponent } from './hello-service/hello-service.component';
 import { HomeComponent } from './home/home.component';
 import { PostsComponent } from './posts/posts.component';
+import { UserDetailsComponent } from './users/user-details/user-details.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'simple-binding', component: SimpleBindingComponent },
   { path: 'hello-service', component: HelloServiceComponent },
   { path: 'posts', component: PostsComponent },
+  { path: 'users/:id', component: UserDetailsComponent },
 ];
 
 @NgModule({

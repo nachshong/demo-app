@@ -14,7 +14,7 @@ export class UsersService {
   constructor(private httpClient: HttpClient, private urlService: UrlService) { }
 
   private mapToLocalUser(user: any): User {
-    return new User(user.id, user.name, user.username, user.email);
+    return new User(user.id, user.name, user.username, user.email, user.phone);
   }
 
   getUsers(): Observable<Array<User>> {
@@ -22,4 +22,8 @@ export class UsersService {
       .pipe(map(list => list.map(this.mapToLocalUser)));
   }
 
+  getUser(id: number): Observable<User> {
+    return this.httpClient.get<any>(this.urlService.baseURL + '/users/' + id)
+    .pipe(map(this.mapToLocalUser));
+  }
 }

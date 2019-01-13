@@ -1,5 +1,5 @@
 export class User {
-    constructor(private _id: number, private _name: string, private _username: string, private _email: string) {
+    constructor(private _id?: number, private _name?: string, private _username?: string, private _email?: string, private _phone?: string) {
     }
 
     get id(): number {
@@ -28,5 +28,12 @@ export class User {
     }
     set email(value: string) {
         this._email = value;
+    }
+
+    get phone(): string {
+        return this._phone;
+    }
+    set phone(value: string) {
+        this._phone = value;
     }
 }

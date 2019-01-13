@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { PostsComponent } from './posts/posts.component';
 import { PostsFilterPipe } from './posts/posts-filter.pipe';
 import { UsersComponent } from './users/users.component';
+import { UserDetailsComponent } from './users/user-details/user-details.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { UsersComponent } from './users/users.component';
     HomeComponent,
     PostsComponent,
     PostsFilterPipe,
-    UsersComponent
+    UsersComponent,
+    UserDetailsComponent
   ],
   imports: [
     BrowserModule,

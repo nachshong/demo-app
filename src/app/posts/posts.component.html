@@ -24,7 +24,7 @@
   <h4>[{{item.id}}] <small>version {{item.version}}</small></h4>
   <h3>{{item.title}}</h3>
   <p>{{item.body}}</p>
-  <p><cite>{{users[item.userId]?.name}}</cite></p>
+  <p><a routerLink="/users/{{item.userId}}"><cite>{{users[item.userId]?.name}}</cite></a></p>
   <br>
   <fieldset>
     <input [(ngModel)]="item.title"><br>

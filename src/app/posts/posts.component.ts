@@ -45,7 +45,7 @@ export class PostsComponent implements OnInit {
   }
 
   editPost(post: Post) {
-    this.postService.editUser(post).subscribe(
+    this.postService.editPost(post).subscribe(
       s => { 
         Object.assign(post, s);
         console.log(s) 
@@ -55,7 +55,7 @@ export class PostsComponent implements OnInit {
 
   deletePost(id: number)
   {
-    this.postService.deleteUser(id).subscribe(
+    this.postService.deletePost(id).subscribe(
       s => { 
         this.posts.splice(this.posts.findIndex(i => i.id == id), 1);
         console.log(s) 

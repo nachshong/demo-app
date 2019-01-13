@@ -33,14 +33,14 @@ export class PostsService {
       .pipe(map(this.mapToLocalPost));
   }
 
-  editUser(post: Post): Observable<Post> {
+  editPost(post: Post): Observable<Post> {
     var value = this.mapToRemotePost(post);
 
     return this.httpClient.put(this.urlService.baseURL + '/posts/' + post.id, value)
       .pipe(map(this.mapToLocalPost));
   }
 
-  deleteUser(id: number)
+  deletePost(id: number)
   {
     return this.httpClient.delete(this.urlService.baseURL + '/posts/' + id);
   }
