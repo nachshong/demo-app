@@ -1,31 +1,33 @@
-# initial new repository 'demo-rep'
-mkdir demo-rep
-cd demo-rep
+# get the 'demo-app' repository for the first time
+git clone https://github.com/nachshong/demo-app
+cd demo-app
+
+# initial new repository 'demo-app' without a clone
+mkdir demo-app
+cd demo-app
 git init
 
-# list of branches
-git branch
-- or - (show hash and subject)
-git branch -v
-- or - (show upstream branch also)
-git branch -vv
-- or - (show remote-tracking also)
-git branch -a
-
-# list of remotes
-git remote
-- or -
-git remote -v
-
-# add remote origin
-git remote add origin <URL>
+# add remote origin (it seted automatically when repo is cloned)
+git remote add origin https://github.com/nachshong/demo-app
 
 # override local repository
 git fetch 
 git reset --hard origin/master
 
-#set upstream
+#set upstream (it seted automatically when repo is cloned)
 git branch -u origin/master
+
+# list of branches
+git branch
+- or - (show hash and subject)
+git branch -v
+- or - (show upstream and remote-tracking branches also)
+git branch -vva 
+
+# list of remotes
+git remote
+- or -
+git remote -v
 
 # fetch all last changes from remote
 git pull
@@ -37,6 +39,11 @@ git merge
 git add .
 git commit
 git push
+
+# fix last commit after push
+git add .
+git commit --amend
+git push --force
 
 # fix last commit author after push
 git commit --amend --reset-author

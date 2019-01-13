@@ -14,6 +14,16 @@
     <a routerLink="/hello-service">Hello Service</a>
     &nbsp;|&nbsp;
     <a routerLink="/posts">Posts</a>
+    &nbsp;|&nbsp;
+    <a routerLink="/account">Account</a>
+    <span *ngIf="isAuthenticated()">
+      &nbsp;|&nbsp;
+      <a [routerLink]="" (click)="logout()">Logout</a>
+    </span>
+    <span *ngIf="!isAuthenticated()">
+      &nbsp;|&nbsp;
+      <a routerLink="/login" >Login</a>
+    </span>
   </div>
   <div>
     <router-outlet></router-outlet>

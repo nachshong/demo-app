@@ -1,0 +1,15 @@
+<p>
+  sanitizer works!
+</p>
+<div>
+  {{myHtml}}
+</div>
+<div [innerHtml]="myHtml"></div>
+<div>
+  <p>
+    <a [href]="dangerousUrl">dangerous url</a>
+  </p>
+  <p>
+    <a [href]="trustedUrl">trusted url</a>
+  </p>
+</div>
