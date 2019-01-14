@@ -24,7 +24,28 @@ footer {
     text-align: left;
 }
 
+
+div.account {
+    float: left;
+    font-size: small;
+    
+}
+
+header nav {
+    clear: both;
+}
+
 img.small-logo {
     width: 40px;
     vertical-align: middle;
+}
+
+label.disabled {
+    color: gray;
+}
+
+a.active {
+    text-decoration: none;
+    color: black;
+    pointer-events: none;
 }

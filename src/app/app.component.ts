@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 
 import { AuthService } from './auth/auth.service'
@@ -9,13 +9,28 @@ import { UrlService } from './conf/url.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'The Open Univeristy of Israel';
+export class AppComponent implements OnInit {
 
-  constructor(private router: Router, private authService: AuthService, private urlService: UrlService) { }
+  title = 'The Open Univeristy of Israel';
+  isLocalDbUp: boolean;
+
+  constructor(private router: Router, private authService: AuthService, private urlService: UrlService) { 
+    this.isLocalDbUp = false;
+  }
+
+  ngOnInit() {
+    this.urlService.checkLocalDb().subscribe(
+      () => { this.isLocalDbUp = true },
+      () => { this.isLocalDbUp = false }
+    );
+  }
 
   isAuthenticated(): boolean {
     return this.authService.isAuthenticated();
+  }
+
+  get username(): string {
+    return this.authService.getTokenData().name;
   }
 
   logout() {
@@ -23,11 +38,11 @@ export class AppComponent {
     this.router.navigate(['/']);
   }
 
-  get isLocalDB(): boolean {
+  get isLocalDbInUse(): boolean {
     return this.urlService.isLocalDb;
   }
 
-  set isLocalDB(value: boolean) {
+  set isLocalDbInUse(value: boolean) {
     this.urlService.isLocalDb = value;
   }
 }
