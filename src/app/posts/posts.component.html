@@ -1,7 +1,7 @@
 <p>
   posts works!
 </p>
-<div style="text-align: left">
+<div>
   User ID: <input [(ngModel)]="newPost.userId"/> <br>
   Title: <input [(ngModel)]="newPost.title"/> <br>
   Body: <input [(ngModel)]="newPost.body"/> <br>
@@ -9,10 +9,10 @@
 </div>
 <br>
 <hr>
-<div style="text-align: left">
-  <strong>Filters: </strong>&nbsp; &nbsp; &nbsp;
-  User ID: <input [(ngModel)]="filterUserId" >&nbsp; &nbsp;
-  Title: <input [(ngModel)]="filterTitle">&nbsp; &nbsp;
+<div class="filters">
+  <strong>Filters: </strong><br>
+  User ID: <input [(ngModel)]="filterUserId" class="small">&nbsp; &nbsp;
+  Title: <input [(ngModel)]="filterTitle" class="small">&nbsp; &nbsp;
   Body: <input [(ngModel)]="filterBody">&nbsp; &nbsp;
 </div>
 <hr>

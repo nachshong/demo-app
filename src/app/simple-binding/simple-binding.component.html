@@ -1,16 +1,31 @@
 <p>
   simple-binding works!
 </p>
+<hr>
+<div>
+  <strong>Character Name: </strong><input value="{{characterName}}" readonly />
+  <br>
+  <button (click)="changeToJosef()" >change to josef</button>
+  <button (click)="changeToDavid()">change to david</button>
+</div>
+<hr>
 <div>
   First Name:
   <br>
   <input [value]="firstName" (input)="setFirstName($event)" >
   <br>
-  <input [value]="firstName" (input)="update($event.target.value)" >
+  <input [value]="firstName" (input)="setFirstName($event.target.value)" >
   <hr>
   Last Name:
   <br>
   <input [(ngModel)]="lastName" >
   <br>
   <input [(ngModel)]="lastName" >
+</div>
+<hr>
+<div style='text-align: center'>
+  <div style="background-color: teal" [style.width.px]="boxSize" [style.height.px]="boxSize" (click)="incBoxSize()">
+    My Box <br><br>
+    (click to enlarge)
+  </div>
 </div>

@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { User } from '../user';
 import { UsersService } from '../users.service'
-import { UrlService } from '../../url.service';
+import { UrlService } from '../../conf/url.service';
 
 @Component({
   selector: 'app-user-details',

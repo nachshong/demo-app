@@ -1,3 +1,29 @@
+body {
+    text-align: center;
+}
+
+div.container {
+    /*display: inline-block;*/
+    margin: auto;  
+    min-width: 600px;
+    max-width: 40%;
+}
+
+header {
+    text-align: center;
+}
+
+main {
+    min-height: 250px;
+    text-align: left;
+}
+
+footer {
+    margin-top: 50px;
+    vertical-align: bottom;
+    text-align: left;
+}
+
 img.small-logo {
     width: 40px;
     vertical-align: middle;

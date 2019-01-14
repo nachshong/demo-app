@@ -7,34 +7,44 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SimpleBindingComponent implements OnInit {
 
+  characterName: string;
   firstName: string;
   lastName: string;
+  boxSize: number;
 
   constructor() { }
 
   ngOnInit() {
-    this.firstName = "";
-    this.lastName = "";
+    this.characterName = 'דוד המלך';
+    this.firstName = '';
+    this.lastName = '';
+    this.boxSize = 100;
   }
 
-  setFirstName(val: any)
+  changeToDavid()
   {
-    if (val && val.target)
-    {
-      this.setFirstNameByEvent(val);
+    this.characterName = "דוד המלך"
+  }
+
+  changeToJosef()
+  {
+    this.characterName = "יוסף הצדיק"
+  }
+
+  setFirstName(value : KeyboardEvent | string)
+  {
+    value = value || '';
+
+    if (typeof value === 'string') {
+      this.firstName = value;
+    } else if (typeof value === 'object') {
+      this.firstName = (<HTMLInputElement>value.target).value;
     }
   }
 
-  setFirstNameByEvent(e : KeyboardEvent) {
-    this.firstName = (<HTMLInputElement>e.target).value;
-  }
-
-  setLastName(value: string)
+  incBoxSize()
   {
-    this.lastName = value;
+    this.boxSize += 10;
   }
 
-  update(value: string) {
-    this.firstName = value;
-  }
 }
