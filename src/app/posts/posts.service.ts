@@ -14,7 +14,7 @@ export class PostsService {
   constructor(private httpClient: HttpClient, private urlService: UrlService)  { }
 
   private mapToRemotePost(post: Post): any {
-    return { id: post.id, userId: post.userId, title: post.title, body: post.body, version: post.version + 1 };
+    return { id: post.id, userId: post.userId, title: post.title, body: post.body, version: post.version };
   }
 
   private mapToLocalPost(post: any): Post {
@@ -35,6 +35,9 @@ export class PostsService {
 
   editPost(post: Post): Observable<Post> {
     var value = this.mapToRemotePost(post);
+
+    // fake version increment (it should be on the server side)
+    value.version++;
 
     return this.httpClient.put(this.urlService.baseURL + '/posts/' + post.id, value)
       .pipe(map(this.mapToLocalPost));

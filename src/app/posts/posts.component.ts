@@ -34,15 +34,17 @@ export class PostsComponent implements OnInit {
     this.postService.addPost(this.newPost).subscribe(
       s => { 
         this.posts.push(s);
+        this.newPost = new Post();
         console.log(s) 
       }
     );
   }
 
   editPost(post: Post) {
-    this.postService.editPost(post).subscribe(
+    this.postService.editPost(post.stage).subscribe(
       s => { 
         Object.assign(post, s);
+        post.stage = null;
         console.log(s) 
       }
     );
@@ -58,4 +60,7 @@ export class PostsComponent implements OnInit {
     );
   }
 
+  toggleEditMode(item: Post) {
+    item.stage = item.stage ? null : Object.assign(new Post(), item);
+  }
 }

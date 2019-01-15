@@ -1,7 +1,7 @@
 div.post {
     border:solid gray 1px;
-    margin: 10px 0;
-    padding: 5px 15px;
+    margin: 15px 0;
+    padding: 5px 15px 15px;
     /*max-width: 500px;*/
 }
 
@@ -11,4 +11,28 @@ div.filters input {
 
 div.filters input.small {
     width: 100px;
+}
+
+fieldset {
+    margin: 0;
+    padding: 5px;
+    text-align: center;
+    margin-inline-start: unset;
+    margin-inline-end: unset;
+}
+
+fieldset textarea, fieldset input, fieldset button {
+    margin: 3px;
+}
+
+fieldset .full {
+    width: 98%;
+}
+
+fieldset textarea {
+    height: 62px;
+}
+
+a {
+    color: black;
 }

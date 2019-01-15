@@ -1,6 +1,9 @@
 <p>
   login works!
 </p>
+<hr>
 <div>
-  <button (click)="login()">Login</button>
+  User Name: <input type="text" [(ngModel)]="username"> // <label (click)="username='john'"><small><strong>Hint: </strong> <em>john</em></small></label><br>
+  Password: <input type="password" [(ngModel)]="password"> // <label (click)="password='doe'"><small><strong>Hint: </strong> <em>doe</em></small></label><br>
+  <button type="submit" (click)="login()">Login</button> &nbsp; <span class="error">{{error}}</span>
 </div>

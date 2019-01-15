@@ -1,8 +1,11 @@
 <p>
   books works!
 </p>
-<div *ngFor="let item of books" style="border:gray 1px; background-color: navajowhite; width: 150px" >
-  <h3>{{item.name}}</h3>  
-  <p>id: {{item.id}}</p>
-  <p dir="rtl">והמחיר הוא: {{item.price}}</p>
+<hr>
+<div class="shelf">
+  <div *ngFor="let item of books" class="book">
+    <h3>{{item.name}}</h3>  
+    <p>id: {{item.id}}</p>
+    <p dir="rtl">מחיר: {{item.price}}</p>
+  </div>
 </div>

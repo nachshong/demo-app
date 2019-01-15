@@ -1,11 +1,12 @@
 <p>
   posts works!
 </p>
+<hr>
 <div>
   User ID: <input [(ngModel)]="newPost.userId"/> <br>
   Title: <input [(ngModel)]="newPost.title"/> <br>
   Body: <input [(ngModel)]="newPost.body"/> <br>
-  <button (click)="addPost()">Create</button>
+  <button (click)="addPost()">POST</button>
 </div>
 <br>
 <hr>
@@ -20,14 +21,16 @@
 <div class="post" *ngFor="let item of posts | postsFilter: filterUserId:filterTitle:filterBody" >
   <h4>[{{item.id}}] <small>version {{item.version}}</small></h4>
   <h3>{{item.title}}</h3>
-  <p>{{item.body}}</p>
-  <p><a routerLink="/users/{{item.userId}}"><cite>{{users[item.userId]?.name}}</cite></a></p>
-  <br>
-  <fieldset>
-    <input [(ngModel)]="item.title"><br>
-    <textarea [(ngModel)]="item.body" dir="rtl"></textarea><br>
-    <button (click)="editPost(item)">Edit</button>
+  <pre>{{item.body}}</pre>
+  <p>
+    <a routerLink="/users/{{item.userId}}"><cite>{{users[item.userId]?.name}}</cite></a>
+    <a [routerLink]="" (click)="toggleEditMode(item)" style="float: right;">{{item.stage ? 'cancel' : 'edit'}}</a>
+  </p>
+  <fieldset *ngIf="item.stage">
+    <input [(ngModel)]="item.stage.title" class="full"><br>
+    <textarea [(ngModel)]="item.stage.body" class="full"></textarea><br>
+    <button (click)="editPost(item)">PUT</button>
     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-    <button (click)="deletePost(item.id)">Delete</button>
+    <button (click)="deletePost(item.id)">DELETE</button>
   </fieldset>
 </div>

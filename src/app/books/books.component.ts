@@ -14,8 +14,10 @@ export class BooksComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.books.push({ id: 101, name: "בראשית", price: 100});
-    this.books.push({ id: 102, name: "שמות", price: 87});
-    this.books.push({ id: 103, name: "ויקרא", price: 57});
+    this.books.push({ id: 101, name: "בראשית", price: 12 });
+    this.books.push({ id: 102, name: "שמות", price: 11 });
+    this.books.push({ id: 103, name: "ויקרא", price: 10 });
+    this.books.push({ id: 104, name: "במדבר", price: 10 });
+    this.books.push({ id: 105, name: "דברים", price: 11 });
   }
 }

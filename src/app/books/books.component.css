@@ -1,0 +1,17 @@
+div.shelf {
+    direction: rtl;
+    display: flex;
+    justify-content: right;
+}
+
+div.book {
+    border-width: 3px;
+    border-color: brown;
+    border-style: outset;
+    background-color: navajowhite; 
+    padding: 10px;
+    margin: 10px;
+    width: 90px;
+    height: 120px;
+    text-align: center;
+}
