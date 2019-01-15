@@ -11,6 +11,7 @@ import { SanitizerComponent } from './sanitizer/sanitizer.component';
 import { AuthGuardService } from './auth/auth-guard.service'
 import { AccountComponent } from './account/account.component';
 import { LoginComponent } from './login/login.component';
+import { SettingsComponent } from './settings/settings.component'
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'account', component: AccountComponent, canActivate: [AuthGuardService] },
   { path: 'sanitizer', component: SanitizerComponent },
+  { path: 'settings', component: SettingsComponent },
 ];
 
 @NgModule({

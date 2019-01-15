@@ -18,6 +18,7 @@ import { UserDetailsComponent } from './users/user-details/user-details.componen
 import { LoginComponent } from './login/login.component';
 import { AccountComponent } from './account/account.component';
 import { SanitizerComponent } from './sanitizer/sanitizer.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { SanitizerComponent } from './sanitizer/sanitizer.component';
     UserDetailsComponent,
     LoginComponent,
     AccountComponent,
-    SanitizerComponent
+    SanitizerComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

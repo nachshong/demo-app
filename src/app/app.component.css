@@ -13,6 +13,14 @@ header {
     text-align: center;
 }
 
+header h1 {
+    margin-bottom: 5px;
+}
+
+header nav {
+    margin-top: 30px;
+}
+
 main {
     min-height: 250px;
     text-align: left;
@@ -44,8 +52,23 @@ label.disabled {
     color: gray;
 }
 
-a.active {
-    text-decoration: none;
+header a {
     color: black;
+}
+
+header a.active {
+    font-style: oblique;
+    font-weight: bold;
+    text-decoration: none;
     pointer-events: none;
+}
+
+footer div.ribbon {
+    display: flex; 
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+footer a {
+    color: black;
 }
