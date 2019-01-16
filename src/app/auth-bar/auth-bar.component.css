@@ -1,0 +1,15 @@
+div.account {
+    float: left;
+    font-size: small;
+}
+
+a {
+    color: black;
+}
+
+a.active {
+    font-style: oblique;
+    font-weight: bold;
+    text-decoration: none;
+    pointer-events: none;
+}

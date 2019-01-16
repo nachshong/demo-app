@@ -3,27 +3,8 @@
     <h1>
       Welcome to {{title}}!
     </h1>
-    <div class="account">
-      <span *ngIf="isAuthenticated()">
-        <strong>Hello {{username}}</strong> | <a [routerLink]="" (click)="logout()">Logout</a>
-      </span>
-      <span *ngIf="!isAuthenticated()">
-        <a routerLink="/login" routerLinkActive="active">Login</a>
-      </span>
-    </div>
-    <nav>
-      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a>
-      &nbsp;|&nbsp;
-      <a routerLink="/simple-binding" routerLinkActive="active">Simple Binding</a>
-      &nbsp;|&nbsp;
-      <a [routerLink]="['/books']" routerLinkActive="active">Books</a>
-      &nbsp;|&nbsp;
-      <a routerLink="/hello-service" routerLinkActive="active">Hello Service</a>
-      &nbsp;|&nbsp;
-      <a routerLink="/posts" routerLinkActive="active">Posts</a>
-      &nbsp;|&nbsp;
-      <a routerLink="/account" routerLinkActive="active">Account</a>
-    </nav>
+    <app-auth-bar></app-auth-bar>
+    <app-nav-bar></app-nav-bar>
     <hr>
   </header>
   <main>

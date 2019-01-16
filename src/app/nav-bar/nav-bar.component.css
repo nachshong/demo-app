@@ -1,0 +1,15 @@
+nav {
+    clear: both;
+    margin-top: 30px;
+}
+
+nav a.active {
+    font-style: oblique;
+    font-weight: bold;
+    text-decoration: none;
+    pointer-events: none;
+}
+
+nav a {
+    color: black;
+}

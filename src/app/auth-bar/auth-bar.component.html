@@ -1,0 +1,8 @@
+<div class="account">
+  <span *ngIf="isAuthenticated()">
+    <strong>Hello {{username}}</strong> | <a [routerLink]="" (click)="logout()">Logout</a>
+  </span>
+  <span *ngIf="!isAuthenticated()">
+    <a routerLink="/login" routerLinkActive="active">Login</a>
+  </span>
+</div>

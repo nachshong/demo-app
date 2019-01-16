@@ -24,14 +24,17 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.error = '';
-    var success = this.authService.login(this.username, this.password);
 
-    if (success) {
-      this.router.navigate([this.returnUrl]);
-    } else {
-      this.error = 'Login failed!';
-      this.password = '';
-    }
+    this.authService.login(this.username, this.password).subscribe(
+      (success) => {
+        if (success) {
+          this.router.navigate([this.returnUrl]);
+        } else {
+          this.error = 'Login failed!';
+          this.password = '';
+        }
+      }
+    );
   }
 
 }
