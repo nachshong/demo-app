@@ -1,9 +1,18 @@
-.post-card {
-    width: 400px;
-    height: 250px;
+mat-card.post {
+    width: 85%;
+    height: 80%;
+    background-color: oldlace;
 }
 
-textarea {
+mat-card-content a {
+    color: black;
+}
+
+pre.post-body {
+    white-space: pre-line;
+}
+
+textarea.post-body {
     height: 62px;
 }
 
@@ -11,14 +20,7 @@ textarea {
     width: 100%;
 }
 
-button.right {
-    float: right;
-}
-
-button.left {
-    float: left;
-}
-
-.actions {
-    text-align: center;
-}
+mat-card-actions {
+    display: flex;
+    justify-content: space-between;
+ }
