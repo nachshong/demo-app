@@ -15,12 +15,15 @@ import { SimpleBindingComponent } from './simple-binding/simple-binding.componen
 import { BooksComponent } from './books/books.component';
 import { HelloServiceComponent } from './hello-service/hello-service.component';
 import { PostsComponent } from './posts/posts.component';
+import { PostsMdComponent } from './posts/posts-md.component';
 import { PostsFilterPipe } from './posts/posts-filter.pipe';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { AccountComponent } from './account/account.component';
 import { LoginComponent } from './login/login.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SanitizerComponent } from './sanitizer/sanitizer.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppMaterialModule } from './app-material.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,7 @@ import { SanitizerComponent } from './sanitizer/sanitizer.component';
     BooksComponent,
     HelloServiceComponent,
     PostsComponent,
+    PostsMdComponent,
     PostsFilterPipe,
     UserDetailsComponent,
     LoginComponent,
@@ -51,7 +55,9 @@ import { SanitizerComponent } from './sanitizer/sanitizer.component';
         whitelistedDomains: ['localhost:3000', 'jsonplaceholder.typicode.com'],
         blacklistedRoutes: []
       }
-    })
+    }),
+    BrowserAnimationsModule,
+    AppMaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

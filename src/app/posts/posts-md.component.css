@@ -1,0 +1,24 @@
+.post-card {
+    width: 400px;
+    height: 250px;
+}
+
+textarea {
+    height: 62px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+button.right {
+    float: right;
+}
+
+button.left {
+    float: left;
+}
+
+.actions {
+    text-align: center;
+}

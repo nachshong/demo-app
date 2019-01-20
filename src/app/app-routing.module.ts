@@ -7,6 +7,7 @@ import { SimpleBindingComponent } from './simple-binding/simple-binding.componen
 import { BooksComponent } from './books/books.component';
 import { HelloServiceComponent } from './hello-service/hello-service.component';
 import { PostsComponent } from './posts/posts.component';
+import { PostsMdComponent } from './posts/posts-md.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { AccountComponent } from './account/account.component';
 import { SanitizerComponent } from './sanitizer/sanitizer.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'books', component: BooksComponent },
   { path: 'hello-service', component: HelloServiceComponent },
   { path: 'posts', component: PostsComponent },
+  { path: 'posts-md', component: PostsMdComponent },
   { path: 'users/:id', component: UserDetailsComponent },
   { path: 'account', component: AccountComponent, canActivate: [AuthGuard] },
   { path: 'sanitizer', component: SanitizerComponent },

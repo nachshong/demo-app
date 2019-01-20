@@ -1,0 +1,51 @@
+<p>
+  posts works!
+</p>
+<hr>
+<div>
+  User ID: <input [(ngModel)]="newPost.userId"/> <br>
+  Title: <input [(ngModel)]="newPost.title"/> <br>
+  Body: <input [(ngModel)]="newPost.body"/> <br>
+  <button (click)="addPost()">POST</button>
+</div>
+<br>
+<hr>
+<div class="filters">
+  <strong>Filters: </strong><br>
+  User ID: <input [(ngModel)]="filterUserId" class="small">&nbsp; &nbsp;
+  Title: <input [(ngModel)]="filterTitle" class="small">&nbsp; &nbsp;
+  Body: <input [(ngModel)]="filterBody">&nbsp; &nbsp;
+</div>
+<hr>
+<br>
+<mat-grid-list cols="2" rowHeight="300px">
+  <mat-grid-tile *ngFor="let item of posts | postsFilter: filterUserId:filterTitle:filterBody" >
+    <mat-card class="post-card">
+      <mat-card-header>
+        <mat-card-subtitle>
+          <strong>[{{item.id}}] <small>version {{item.version}}</small></strong>
+        </mat-card-subtitle>
+        <mat-card-title *ngIf="!item.stage">{{item.title}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content *ngIf="!(item.stage)">
+        <pre>{{item.body}}</pre>
+        <p>
+          <a routerLink="/users/{{item.userId}}"><cite>{{users[item.userId]?.name}}</cite></a>
+        </p>
+      </mat-card-content>
+      <mat-card-content *ngIf="item.stage">
+        <mat-form-field class="full-width">
+          <input matInput [(ngModel)]="item.stage.title" class="full">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <textarea matInput [(ngModel)]="item.stage.body" class="full"></textarea>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions class="actions">
+        <button mat-button color="primary" class="left" (click)="toggleEditMode(item)">{{item.stage ? 'cancel' : 'edit'}}</button>
+        <button *ngIf="!item.stage" mat-button color="warn" class="right" (click)="deletePost(item.id)">delete</button>
+        <button *ngIf="item.stage" mat-raised-button color="primary" (click)="editPost(item)">PUT</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
