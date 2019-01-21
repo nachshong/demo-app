@@ -1,12 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { JwtModule } from '@auth0/angular-jwt';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AppErrorHandler } from './app-error-handler';
 import { AuthService } from './auth/auth.service';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { AuthBarComponent } from './auth-bar/auth-bar.component';
@@ -24,6 +25,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { SanitizerComponent } from './sanitizer/sanitizer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app-material.module';
+import { HttpErrorInterceptor } from './http-error.interceptor';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,17 @@ import { AppMaterialModule } from './app-material.module';
     BrowserAnimationsModule,
     AppMaterialModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: ErrorHandler,
+      useClass: AppErrorHandler
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
