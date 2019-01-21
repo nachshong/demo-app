@@ -1,11 +1,26 @@
+div.filters input {
+    width: 200px;
+}
+
+div.filters input.small {
+    width: 100px;
+}
+
+mat-grid-list {
+    background-color: whitesmoke;
+}
+
 mat-card.post {
     width: 85%;
-    height: 80%;
-    background-color: oldlace;
+    
 }
 
 mat-card-content a {
     color: black;
+}
+
+input.post-title {
+    font-weight: bold;
 }
 
 pre.post-body {

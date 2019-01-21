@@ -20,17 +20,20 @@
 <br>
 <div class="post" *ngFor="let item of posts | postsFilter: filterUserId:filterTitle:filterBody" >
   <h4>[{{item.id}}] <small>version {{item.version}}</small></h4>
-  <h3>{{item.title}}</h3>
-  <pre>{{item.body}}</pre>
-  <p>
-    <a routerLink="/users/{{item.userId}}"><cite>{{users[item.userId]?.name}}</cite></a>
-    <a [routerLink]="" (click)="toggleEditMode(item)" style="float: right;">{{item.stage ? 'cancel' : 'edit'}}</a>
-  </p>
-  <fieldset *ngIf="item.stage">
-    <input [(ngModel)]="item.stage.title" class="full"><br>
-    <textarea [(ngModel)]="item.stage.body" class="full"></textarea><br>
-    <button (click)="editPost(item)">PUT</button>
-    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-    <button (click)="deletePost(item.id)">DELETE</button>
-  </fieldset>
+  <div *ngIf="!item.stage">
+    <h3>{{item.title}}</h3>
+    <pre>{{item.body}}</pre>
+    <p>
+      <a routerLink="/users/{{item.userId}}"><cite>{{users[item.userId]?.name}}</cite></a>
+    </p>
+  </div>
+  <div *ngIf="item.stage" class="edit-pane">
+    <input [(ngModel)]="item.stage.title"><br>
+    <textarea [(ngModel)]="item.stage.body"></textarea><br>
+  </div>
+  <div class="actions">
+    <a [routerLink]="" (click)="toggleEditMode(item)">{{item.stage ? 'cancel' : 'edit'}}</a>
+    <button *ngIf="!item.stage" (click)="deletePost(item.id)">DELETE</button>
+    <button *ngIf="item.stage" (click)="editPost(item)">PUT</button>
+  </div>
 </div>
