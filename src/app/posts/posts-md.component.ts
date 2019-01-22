@@ -14,6 +14,7 @@ export class PostsMdComponent implements OnInit {
   posts: Array<Post>;
   users: Object;
   newPost: Post;
+  usersList: Array<any>;
 
   constructor(private postService: PostsService, private usersService: UsersService) { 
     this.users = new Object();
@@ -22,7 +23,7 @@ export class PostsMdComponent implements OnInit {
 
   ngOnInit() {
     this.usersService.getUsers().subscribe(
-      list => { list.forEach(s => { this.users[s.id] = s}) }
+      list => { this.usersList = list; list.forEach(s => { this.users[s.id] = s}) }
     );
 
     this.postService.getPosts().subscribe(

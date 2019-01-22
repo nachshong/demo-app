@@ -1,9 +1,6 @@
-div.filters input {
-    width: 200px;
-}
-
-div.filters input.small {
-    width: 100px;
+div.filters mat-form-field {
+    width: 28%;
+    margin-right: 30px;
 }
 
 mat-grid-list {

@@ -36,4 +36,9 @@ export class User {
     set phone(value: string) {
         this._phone = value;
     }
+
+    toString() {
+        return this._name;
+    }
+
 }

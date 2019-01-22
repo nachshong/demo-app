@@ -12,9 +12,19 @@
 <hr>
 <div class="filters">
   <strong>Filters: </strong><br>
-  User ID: <input [(ngModel)]="filterUserId" class="small">&nbsp; &nbsp;
-  Title: <input [(ngModel)]="filterTitle" class="small">&nbsp; &nbsp;
-  Body: <input [(ngModel)]="filterBody">&nbsp; &nbsp;
+  <mat-form-field appearance="standard">
+    <mat-label>User ID</mat-label>
+    <input [(ngModel)]="filterUserId" matInput [matAutocomplete]="auto">
+  </mat-form-field>
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let user of usersList" [value]="user">{{user.name}}</mat-option>
+  </mat-autocomplete>
+  <mat-form-field>
+    <input [(ngModel)]="filterTitle" matInput placeholder="Title" >
+  </mat-form-field>
+  <mat-form-field>
+    <input [(ngModel)]="filterBody" matInput placeholder="Body">
+  </mat-form-field>
 </div>
 <hr>
 <br>
