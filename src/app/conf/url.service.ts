@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs'
-import { mapTo } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment'
 
@@ -10,22 +9,27 @@ import { environment } from '../../environments/environment'
 })
 export class UrlService {
 
-  private _baseUrl: string;
+  private _useLocalDb: boolean | null;
 
   constructor(private httpClient: HttpClient) {
-      this._baseUrl = environment.API_URL_PLACE
+      this._useLocalDb = null;
   }
 
-  get isLocalDb(): boolean {
-    return this._baseUrl == environment.API_URL_LOCAL;
+  get useLocalDb(): boolean {
+    if (this._useLocalDb != null) {
+      return this._useLocalDb;
+    }
+
+    return this._useLocalDb = (sessionStorage.getItem('settings.useLocalDb') == 'true');
   }
   
-  set isLocalDb(value: boolean) {
-    this._baseUrl = value ? environment.API_URL_LOCAL : environment.API_URL_PLACE;
+  set useLocalDb(value: boolean) {
+    this._useLocalDb = value;
+    sessionStorage.setItem('settings.useLocalDb', value ? 'true' : 'false');
   }
 
   get baseURL(): string {
-    return this._baseUrl;
+    return this.useLocalDb ? environment.API_URL_LOCAL : environment.API_URL_PLACE;
   }
 
   checkLocalDb(): Observable<void> {

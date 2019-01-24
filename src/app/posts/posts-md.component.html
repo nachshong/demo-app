@@ -2,34 +2,48 @@
   posts works!
 </p>
 <hr>
-<div>
-  User ID: <input [(ngModel)]="newPost.userId"/> <br>
-  Title: <input [(ngModel)]="newPost.title"/> <br>
-  Body: <input [(ngModel)]="newPost.body"/> <br>
-  <button (click)="addPost()">POST</button>
+<h4>Create new post:</h4>
+<div class="new-post">
+  <form #newPostForm="ngForm" (ngSubmit)="addPost(newPostForm)">
+    <mat-form-field>
+      <mat-select placeholder="Author" [(ngModel)]="newPost.userId" name="userId" required>
+        <mat-option *ngFor="let item of users" [value]="item.id">{{item.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input [(ngModel)]="newPost.title" name="title" matInput placeholder="Title" required>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea [(ngModel)]="newPost.body" name="body" matInput placeholder="Body"></textarea>
+    </mat-form-field>
+    <div class="actions-bar">
+      <button type="submit" mat-raised-button color="primary">POST</button>
+      <button type="reset" mat-button>reset</button>
+    </div>
+  </form>
 </div>
-<br>
-<hr>
+<hr/>
+<h4>Filters:</h4>
 <div class="filters">
-  <strong>Filters: </strong><br>
-  <mat-form-field appearance="standard">
+  <mat-form-field>
     <mat-label>User ID</mat-label>
-    <input [(ngModel)]="filterUserId" matInput [matAutocomplete]="auto">
+    <input [(ngModel)]="filter.user" matInput [matAutocomplete]="auto">
   </mat-form-field>
   <mat-autocomplete #auto="matAutocomplete">
-    <mat-option *ngFor="let user of usersList" [value]="user">{{user.name}}</mat-option>
+    <mat-option *ngFor="let user of users" [value]="user">{{user.name}}</mat-option>
   </mat-autocomplete>
   <mat-form-field>
-    <input [(ngModel)]="filterTitle" matInput placeholder="Title" >
+    <input [(ngModel)]="filter.title" matInput placeholder="Title" >
   </mat-form-field>
   <mat-form-field>
-    <input [(ngModel)]="filterBody" matInput placeholder="Body">
+    <input [(ngModel)]="filter.body" matInput placeholder="Body">
   </mat-form-field>
+  <button mat-button (click)="resetFilter()">reset</button>
 </div>
 <hr>
 <br>
 <mat-grid-list cols="2">
-  <mat-grid-tile *ngFor="let item of posts | postsFilter: filterUserId:filterTitle:filterBody" >
+  <mat-grid-tile *ngFor="let item of posts | postsFilter: filter.user:filter.title:filter.body" >
     <mat-card class="post">
       <mat-card-header>
         <mat-card-subtitle>
@@ -40,7 +54,7 @@
       <mat-card-content *ngIf="!item.stage">
         <pre class="post-body">{{item.body}}</pre>
         <p>
-          <a routerLink="/users/{{item.userId}}"><cite>{{users[item.userId]?.name}}</cite></a>
+          <a routerLink="/users/{{item.userId}}"><cite>{{usersMap?.get(item.userId)?.name}}</cite></a>
         </p>
       </mat-card-content>
       <mat-card-content *ngIf="item.stage">

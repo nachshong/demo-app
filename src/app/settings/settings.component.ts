@@ -23,11 +23,11 @@ export class SettingsComponent implements OnInit {
   }
 
   get isLocalDbInUse(): boolean {
-    return this.urlService.isLocalDb;
+    return this.urlService.useLocalDb;
   }
 
   set isLocalDbInUse(value: boolean) {
-    this.urlService.isLocalDb = value;
+    this.urlService.useLocalDb = value;
   }
 
 }

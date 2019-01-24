@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 import { PostsService } from './posts.service'
 import { Post } from './post'
 import { UsersService } from '../users/users.service';
+import { User } from '../users/user';
 
 @Component({
   selector: 'app-posts-md',
@@ -12,33 +14,46 @@ import { UsersService } from '../users/users.service';
 export class PostsMdComponent implements OnInit {
 
   posts: Array<Post>;
-  users: Object;
+  users: Array<User>;
+  usersMap: Map<number, User>;
   newPost: Post;
-  usersList: Array<any>;
+  filter: any;
 
   constructor(private postService: PostsService, private usersService: UsersService) { 
-    this.users = new Object();
+    this.posts = null;
+    this.users = null;
+    this.usersMap = null;
     this.newPost = new Post();
+    this.filter = new Object();
   }
 
   ngOnInit() {
-    this.usersService.getUsers().subscribe(
-      list => { this.usersList = list; list.forEach(s => { this.users[s.id] = s}) }
-    );
+    this.postService.getPosts().subscribe(list => { 
+      this.posts = list 
+    });
 
-    this.postService.getPosts().subscribe(
-      list => { this.posts = list }
-    );
+    this.usersService.getUsers().subscribe(list => {
+      this.users = list;
+      this.usersMap = new Map(list.map(u => <[number, User]>[u.id, u]));
+    });
   }
 
-  addPost() {
-    this.postService.addPost(this.newPost).subscribe(
-      s => { 
-        this.posts.push(s);
-        this.newPost = new Post();
-        console.log(s) 
-      }
-    );
+  resetFilter() {
+    this.filter = new Object();
+  }
+
+  addPost(form: NgForm) {
+    if (form.valid) {
+      this.postService.addPost(this.newPost).subscribe(
+        s => {
+          this.posts.push(s);
+          form.resetForm();
+          console.log(s) 
+        }
+      );
+    } else {
+
+    }
   }
 
   editPost(post: Post) {

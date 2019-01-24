@@ -15,11 +15,25 @@ export class Post {
         this._version = version || 0;
     }
 
+    private checkNumber(value: number | string) {
+        if (value === undefined || value === null || value === '') {
+            return undefined;
+        }
+
+        if (typeof value !== 'number' && (typeof value !== 'string' || Number.isNaN(value = Number(value)))) {
+            throw new Error(value + ' is not a number');
+        }
+
+        return value;
+    }
+
     get id(): number {
         return this._id;
     }
     set id(value: number) {
-        if (value && value <= 0)
+        value = this.checkNumber(value);
+
+        if (value <= 0)
             throw new Error("id must be a positive number");
 
         this._id = value;
@@ -29,7 +43,9 @@ export class Post {
         return this._userId;
     }
     set userId(value: number) {
-        if (value && value <= 0)
+        value = this.checkNumber(value);
+
+        if (value <= 0)
             throw new Error("id must be a positive number");
 
         this._userId = value;
