@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { map, startWith } from 'rxjs/operators'
 import { NgForm, FormControl } from '@angular/forms';
+import { Observable, Subject } from 'rxjs';
+import { map, startWith, first } from 'rxjs/operators'
 
 import { PostsService } from './posts.service'
 import { Post } from './post'
 import { UsersService } from '../users/users.service';
 import { User } from '../users/user';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-posts-md',
@@ -33,28 +33,50 @@ export class PostsMdComponent implements OnInit {
   }
 
   ngOnInit() {
+    let dataGate = new Subject();
+
+    dataGate.pipe(
+      first(() => !!(this.usersMap && this.posts))
+    ).subscribe(() => this.initSetPostsByUser());
+
+    dataGate.pipe(
+      first(() => !!(this.users))
+    ).subscribe(() => this.initSetUserFilterOptions());
+
     this.postService.getPosts().subscribe(list => { 
-      this.posts = list 
+      this.posts = list;
+      dataGate.next();
     });
 
     this.usersService.getUsers().subscribe(list => {
       this.users = list;
+      dataGate.next();
+
       this.usersMap = new Map(list.map(u => <[number, User]>[u.id, u]));
+      dataGate.next();
     });
-    
+   
+  }
+
+  initSetPostsByUser() {
+    this.posts.forEach(item => {
+      item.userName = this.usersMap.get(item.userId).name;
+    });
+  }
+
+  initSetUserFilterOptions() {
     this.userFilterOptions = this.userFilterControl.valueChanges.pipe(
       startWith(''),
-      map((value: string) => {
+      map((value: string | User) => {
         this.filter.user = value;
 
-        if (!value || typeof value === 'object')
+        if (!value || value instanceof User)
           return this.users;
 
-        let pattern = value.toLowerCase();
-        return this.users.filter(u => u.name.toLowerCase().includes(pattern))
+        let search = value.toLowerCase();
+        return this.users.filter(u => u.name.toLowerCase().includes(search))
       })
     );
-    
   }
 
   resetFilter() {
@@ -71,7 +93,7 @@ export class PostsMdComponent implements OnInit {
         }
       );
     } else {
-
+      // invalid
     }
   }
 

@@ -43,7 +43,7 @@
 <hr>
 <br>
 <mat-grid-list cols="2">
-  <mat-grid-tile *ngFor="let item of posts | postsFilter: filter.user:filter.title:filter.body:usersMap" >
+  <mat-grid-tile *ngFor="let item of posts | postsFilter: filter.user:filter.title:filter.body" >
     <mat-card class="post">
       <mat-card-header>
         <mat-card-subtitle>
@@ -54,7 +54,7 @@
       <mat-card-content *ngIf="!item.stage">
         <pre class="post-body">{{item.body}}</pre>
         <p>
-          <a routerLink="/users/{{item.userId}}"><cite>{{usersMap?.get(item.userId)?.name}}</cite></a>
+          <a routerLink="/users/{{item.userId}}"><cite>{{item.userName}}</cite></a>
         </p>
       </mat-card-content>
       <mat-card-content *ngIf="item.stage">
