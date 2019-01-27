@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { map, startWith } from 'rxjs/operators'
+import { NgForm, FormControl } from '@angular/forms';
 
 import { PostsService } from './posts.service'
 import { Post } from './post'
 import { UsersService } from '../users/users.service';
 import { User } from '../users/user';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-posts-md',
@@ -18,6 +20,8 @@ export class PostsMdComponent implements OnInit {
   usersMap: Map<number, User>;
   newPost: Post;
   filter: any;
+  userFilterControl: FormControl;
+  userFilterOptions: Observable<User[]>;
 
   constructor(private postService: PostsService, private usersService: UsersService) { 
     this.posts = null;
@@ -25,6 +29,7 @@ export class PostsMdComponent implements OnInit {
     this.usersMap = null;
     this.newPost = new Post();
     this.filter = new Object();
+    this.userFilterControl = new FormControl();
   }
 
   ngOnInit() {
@@ -36,6 +41,20 @@ export class PostsMdComponent implements OnInit {
       this.users = list;
       this.usersMap = new Map(list.map(u => <[number, User]>[u.id, u]));
     });
+    
+    this.userFilterOptions = this.userFilterControl.valueChanges.pipe(
+      startWith(''),
+      map((value: string) => {
+        this.filter.user = value;
+
+        if (!value || typeof value === 'object')
+          return this.users;
+
+        let pattern = value.toLowerCase();
+        return this.users.filter(u => u.name.toLowerCase().includes(pattern))
+      })
+    );
+    
   }
 
   resetFilter() {

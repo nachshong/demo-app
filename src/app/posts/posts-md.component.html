@@ -26,11 +26,11 @@
 <h4>Filters:</h4>
 <div class="filters">
   <mat-form-field>
-    <mat-label>User ID</mat-label>
-    <input [(ngModel)]="filter.user" matInput [matAutocomplete]="auto">
+    <mat-label>User</mat-label>
+    <input matInput [matAutocomplete]="autoUsers" [formControl]="userFilterControl">
   </mat-form-field>
-  <mat-autocomplete #auto="matAutocomplete">
-    <mat-option *ngFor="let user of users" [value]="user">{{user.name}}</mat-option>
+  <mat-autocomplete #autoUsers="matAutocomplete">
+    <mat-option *ngFor="let user of userFilterOptions | async" [value]="user">{{user.name}}</mat-option>
   </mat-autocomplete>
   <mat-form-field>
     <input [(ngModel)]="filter.title" matInput placeholder="Title" >
@@ -43,7 +43,7 @@
 <hr>
 <br>
 <mat-grid-list cols="2">
-  <mat-grid-tile *ngFor="let item of posts | postsFilter: filter.user:filter.title:filter.body" >
+  <mat-grid-tile *ngFor="let item of posts | postsFilter: filter.user:filter.title:filter.body:usersMap" >
     <mat-card class="post">
       <mat-card-header>
         <mat-card-subtitle>

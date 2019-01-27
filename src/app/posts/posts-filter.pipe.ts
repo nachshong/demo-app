@@ -9,14 +9,18 @@ import { User } from '../users/user';
 })
 export class PostsFilterPipe implements PipeTransform {
 
-  transform(value: Array<Post>, user: number | User, title: string, body: string): Array<Post> {
+  private like(value: string, search: string) {
+    return value == search || !search || value.toLowerCase().includes(search.toLowerCase());
+  }
+
+  transform(value: Array<Post>, user: number | string | User, title: string, body: string, usersMap?: Map<number, User>): Array<Post> {
     if (!value)
       return null;
 
     return value.filter((s) => {
-      return (!user || s.userId == user || user instanceof User &&  s.userId == user.id)
-        && (!title || s.title && s.title.toUpperCase().indexOf(title.toUpperCase()) >= 0)
-        && (!body || s.body && s.body.toUpperCase().indexOf(body.toUpperCase()) >= 0);
+      return (!user || s.userId == user || user instanceof User &&  s.userId == user.id || typeof user == 'string' && usersMap && this.like(usersMap.get(s.userId).name, user))
+        && this.like(s.title, title)
+        && this.like(s.body, body);
     });
   }
 }
