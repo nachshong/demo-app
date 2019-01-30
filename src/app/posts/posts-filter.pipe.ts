@@ -18,7 +18,7 @@ export class PostsFilterPipe implements PipeTransform {
       return null;
 
     return value.filter((s) => {
-      return (!user || s.userId == user || user instanceof User &&  s.userId == user.id || typeof user === 'string' && this.like(s.userName, user))
+      return (!user || s.userId == user || user instanceof User &&  s.userId == user.id || typeof user === 'string' && this.like(s.author, user))
         && this.like(s.title, title)
         && this.like(s.body, body);
     });

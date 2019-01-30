@@ -7,6 +7,7 @@ import { PostsService } from './posts.service'
 import { Post } from './post'
 import { UsersService } from '../users/users.service';
 import { User } from '../users/user';
+import { ByRefValue } from '../common/by-ref-value';
 
 @Component({
   selector: 'app-posts-md',
@@ -22,6 +23,7 @@ export class PostsMdComponent implements OnInit {
   filter: any;
   userFilterControl: FormControl;
   userFilterOptions: Observable<User[]>;
+  total: ByRefValue<number>;
 
   constructor(private postService: PostsService, private usersService: UsersService) { 
     this.posts = null;
@@ -30,6 +32,7 @@ export class PostsMdComponent implements OnInit {
     this.newPost = new Post();
     this.filter = new Object();
     this.userFilterControl = new FormControl();
+    this.total = new ByRefValue(0);
   }
 
   ngOnInit() {
@@ -60,7 +63,7 @@ export class PostsMdComponent implements OnInit {
 
   initSetPostsByUser() {
     this.posts.forEach(item => {
-      item.userName = this.usersMap.get(item.userId).name;
+      item.author = this.usersMap.get(item.userId).name;
     });
   }
 
@@ -81,6 +84,7 @@ export class PostsMdComponent implements OnInit {
 
   resetFilter() {
     this.filter = new Object();
+    this.userFilterControl.reset();
   }
 
   addPost(form: NgForm) {
@@ -88,6 +92,7 @@ export class PostsMdComponent implements OnInit {
       this.postService.addPost(this.newPost).subscribe(
         s => {
           this.posts.push(s);
+          s.author = this.usersMap.get(s.userId).name;
           form.resetForm();
           console.log(s) 
         }

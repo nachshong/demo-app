@@ -18,6 +18,7 @@ import { HelloServiceComponent } from './hello-service/hello-service.component';
 import { PostsComponent } from './posts/posts.component';
 import { PostsMdComponent } from './posts/posts-md.component';
 import { PostsFilterPipe } from './posts/posts-filter.pipe';
+import { CounterPipe } from './common/counter.pipe';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { AccountComponent } from './account/account.component';
 import { LoginComponent } from './login/login.component';
@@ -39,6 +40,7 @@ import { HttpErrorInterceptor } from './http-error.interceptor';
     PostsComponent,
     PostsMdComponent,
     PostsFilterPipe,
+    CounterPipe,
     UserDetailsComponent,
     LoginComponent,
     AccountComponent,

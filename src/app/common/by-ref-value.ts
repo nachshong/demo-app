@@ -1,0 +1,7 @@
+export class ByRefValue<T> {
+    constructor(value: T) {
+        this.value = value;
+    }
+
+    value: T;
+}

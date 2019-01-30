@@ -6,7 +6,7 @@ export class Post {
     private _version: number;
 
     stage: Post;
-    userName: string;
+    author: string;
 
     constructor (id?: number, userId?: number, title?: string, body?: string, version?: number) {
         this.id = id;
