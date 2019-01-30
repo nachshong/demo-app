@@ -21,30 +21,36 @@ export class SimpleBindingComponent implements OnInit {
     this.boxSize = 100;
   }
 
-  changeToDavid()
-  {
+  changeToDavid() {
     this.characterName = "דוד המלך"
   }
 
-  changeToJosef()
-  {
+  changeToJosef() {
     this.characterName = "יוסף הצדיק"
   }
 
-  setFirstName(value : KeyboardEvent | string)
-  {
-    value = value || '';
-
-    if (typeof value === 'string') {
-      this.firstName = value;
-    } else if (typeof value === 'object') {
-      this.firstName = (<HTMLInputElement>value.target).value;
-    }
+  setFirstNameByEvent(event: KeyboardEvent) {
+    this.firstName = (<HTMLInputElement>event.target).value;
   }
 
-  incBoxSize()
-  {
+  setFirstNameByValue(value: string) {
+    this.firstName = value;
+  }
+
+  setFirstNameByInput(input: HTMLInputElement) {
+    this.firstName = input.value;
+  }
+
+  incBoxSize() {
     this.boxSize += 10;
+  }
+
+  decBoxSize() {
+    if (this.boxSize > 100) {
+      this.boxSize -= 10;
+    }
+
+    return false;
   }
 
 }
