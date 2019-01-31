@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class CounterService {
 
-  value: number;
+  private value: number;
 
   constructor() { 
     this.value = 0;

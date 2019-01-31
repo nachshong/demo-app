@@ -46,7 +46,7 @@
   Total: <strong>{{total.value}}</strong> <span *ngIf="posts.length > total.value"> (from {{posts.length}})</span>
 </p>
 <mat-grid-list cols="2">
-  <mat-grid-tile *ngFor="let item of posts | postsFilter:filter.user:filter.title:filter.body | counter:total" >
+  <mat-grid-tile *ngFor="let item of posts | postsFilter:filter.user:filter.title:filter.body | count:total" >
     <mat-card class="post">
       <mat-card-header>
         <mat-card-subtitle>
