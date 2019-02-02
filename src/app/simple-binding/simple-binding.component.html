@@ -3,29 +3,64 @@
 </p>
 <hr>
 <div>
-  <strong>Character Name: </strong><input value="{{characterName}}" readonly>
+  <p>
+    Simple one-way binding using interpolation <code>{{...}<!---->}</code>
+  </p>
+  <input value="{{characterName}}" readonly>
   <br>
   <button (click)="changeToJosef()">change to josef</button>
   <button (click)="changeToDavid()">change to david</button>
 </div>
 <hr>
 <div>
+  <p>
+    Two-way binding using property binding <code>[property]</code> and event binding <code>(event)</code>
+  </p>
   First Name:
   <br>
-  <input [value]="firstName" (input)="setFirstNameByEvent($event)">
+  <input [value]="firstName" (input)="setFirstNameByEvent($event)"> <small> // $event</small>
   <br>
-  <input [value]="firstName" (input)="setFirstNameByInput(input1)" #input1>
+  <input [value]="firstName" (input)="setFirstNameByValue($event.target.value)"> <small> // $event.target.value</small>
+  <p>
+    The value is passed to the handler by the template <code>$event</code> object
+  </p>
+</div>
+<hr>
+<div>
+  <p>
+    Again, two-way binding using property binding <code>[property]</code> and event binding <code>(event)</code>
+  </p>
+  <input [value]="middleName" (input)="setMiddleNameByInput(middle1)" #middle1> <small> // middle1</small>
   <br>
-  <input [value]="firstName" (input)="setFirstNameByValue($event.target.value)">
-  <hr>
+  <input [value]="middleName" (input)="setMiddleNameByValue(middle2.value)" #middle2> <small> // middle2.value</small>
+  <p>
+    But here, the value is passed to the handler by a template reference variables <code>#var</code>
+  </p>
+</div>
+<hr>
+<div>
+  <p>
+    Two-way binging using NgModel directive <code>[(ngModel)]</code>
+  </p>
   Last Name:
   <br>
   <input [(ngModel)]="lastName">
   <br>
   <input [(ngModel)]="lastName">
+  <p>
+    Before using the ngModel directive, you must import the <em>FormsModule</em> and add it to the NgModule's imports list.
+  </p>
 </div>
 <hr>
-<div class="box" [style.width.px]="boxSize" [style.height.px]="boxSize" (click)="incBoxSize()" (contextmenu)="decBoxSize()">
-  My Box <br><br>
-  (click to enlarge)
+<div>
+  <p>
+    Style binding using the built-in NgStyle directive <code>[style.xyz]</code>
+  </p>
+  <div class="box" [style.width.px]="boxSize" [style.height.px]="boxSize" [class.big]="boxSize >= 150" [class.huge]="boxSize >= 200" (click)="incBoxSize()" (contextmenu)="decBoxSize()">
+    <strong>My Box</strong>
+    <small>(click to enlarge)</small>
+  </div>
+  <p>
+    A class binding is also enabled here by using the NgClass directive <code>[class.name]</code>
+  </p>
 </div>

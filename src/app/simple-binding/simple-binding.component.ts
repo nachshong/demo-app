@@ -9,6 +9,7 @@ export class SimpleBindingComponent implements OnInit {
 
   characterName: string;
   firstName: string;
+  middleName: string;
   lastName: string;
   boxSize: number;
 
@@ -17,6 +18,7 @@ export class SimpleBindingComponent implements OnInit {
   ngOnInit() {
     this.characterName = 'דוד המלך';
     this.firstName = '';
+    this.middleName = '';
     this.lastName = '';
     this.boxSize = 100;
   }
@@ -37,12 +39,20 @@ export class SimpleBindingComponent implements OnInit {
     this.firstName = value;
   }
 
-  setFirstNameByInput(input: HTMLInputElement) {
-    this.firstName = input.value;
+  setMiddleNameByInput(input: HTMLInputElement) {
+    this.middleName = input.value;
+  }
+
+  setMiddleNameByValue(value: string) {
+    this.middleName = value;
   }
 
   incBoxSize() {
-    this.boxSize += 10;
+    if (this.boxSize < 200) {
+      this.boxSize += 10;
+    }
+
+    return false;
   }
 
   decBoxSize() {

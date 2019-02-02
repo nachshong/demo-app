@@ -1,5 +1,23 @@
+code {
+    background-color: aliceblue;
+    font-size: 110%;
+}
+
 div.box {
     background-color: teal;
     cursor: pointer;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-content: center;
+    user-select: none;
+}
+
+div.box.big {
+    background-color: coral;
+}
+
+div.box.big.huge {
+    background-color: brown;
 }
