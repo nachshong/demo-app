@@ -5,6 +5,61 @@
 <div>
   <input [(ngModel)]="name"><button (click)="greet()">Hello</button>
   <p>
-    {{greeting}}
+    {{greeting}}<br>
+  </p>
+</div>
+<hr>
+<div>
+  <button (click)="next()">Next</button>
+  <p>
+    Local counter: {{counter}}
+  </p>
+</div>
+<hr>
+<div>
+  <p>
+    Display service uptime using <code>interval()</code> function.<br>
+  </p>
+  <p>
+    <button type="button" (click)="initUptime1()" [disabled]="uptime1">Start Uptime 1</button>
+    Uptime: {{uptime1 || 'wait...'}}
+  </p>
+  <p>
+      It use <code>takeUntil(notifier)</code> operation to prevent memory leak,
+      when "notifier" is a <code>Subject</code> that emits its value at the <code>ngOnDestroy()</code> method.
+    </p>
+</div>
+<hr>
+<div>
+  <p>
+    Same as above, but here we prevent the memory leak by explicit call to <code>unsubscribe()</code> at the <code>ngOnDestroy()</code> method.
+  </p>
+  <p>
+    <button type="button" (click)="initUptime2()" [disabled]="uptime2">Start Uptime 2</button>
+    Uptime: {{uptime2 || 'wait...'}}
+  </p>
+</div>
+<hr>
+<div>
+  <p>
+    Here, unsubscribe is handled automatically by the template AsyncPipe <code>{{var | async}<!---->}</code>,
+    when "var" is an Observable.
+  </p>
+  <p>
+    <button type="button" (click)="initUptime3()" [disabled]="uptime3">Start Uptime 3</button>
+    Uptime: {{(uptime3 | async) || 'wait...'}}
+  </p>
+</div>
+<hr>
+<div>
+  <p>
+    And here, we heve a memory leak... <br>
+    To see it, go to the 'Memory' tab of the 'Developer Tools' (F12), 
+    take a snapshots before and after navigation,
+    search for the HelloServiceComponent and look at the number of instances.
+  </p>
+  <p>
+    <button type="button" (click)="initUptime4()" [disabled]="uptime4">Start Uptime 4</button>
+    Uptime: {{(uptime4) || 'wait...'}}
   </p>
 </div>

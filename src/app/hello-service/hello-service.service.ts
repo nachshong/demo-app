@@ -1,38 +1,33 @@
 import { Injectable } from '@angular/core';
-import { Observable, timer } from 'rxjs';
-import { mapTo } from 'rxjs/operators';
-
+import { Observable, timer, interval } from 'rxjs';
+import { map, mapTo, startWith } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HelloServiceService {
 
-  counter: number;
+  private counter: number;
+  private start: number;
 
   constructor() { 
     this.counter = 0;
+    this.start = Date.now();
   }
 
-  makeGreet(name: String) {
-    return this.counter + '. Hello ' + name;
-  }
-
-  greeting(name: string): Observable<string>
-  {
+  greeting(name: string): Observable<string> {
     this.counter++;
-
-    return timer(50).pipe(mapTo(this.counter + '. Hello ' + name));
+    return timer(500).pipe(mapTo(`Hello ${name}! (${this.counter})`));
   }
 
-  greeting2(name: string): Observable<string>
-  {
-    this.counter++;
-
-    return new Observable<string>((s) => { 
-      setTimeout(() => {
-        s.next(this.counter + ". Hello " + name);
-      }, 50);
-    });
+  getUptime(): Observable<string>{
+    return interval(1000).pipe(
+      map(() => formatUptime(Date.now() - this.start)),
+      startWith('loading...')
+    );
   }
+}
+
+function formatUptime(value: number): string {
+  return Math.floor(value/3600000) + ':' + (new Date(value)).toUTCString().slice(-9, -4);
 }

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
 import { HelloServiceService } from './hello-service.service';
 import { CounterService } from './counter.service';
 
@@ -8,26 +11,71 @@ import { CounterService } from './counter.service';
   styleUrls: ['./hello-service.component.css'],
   providers: [CounterService]
 })
-export class HelloServiceComponent implements OnInit {
+export class HelloServiceComponent implements OnInit, OnDestroy {
+
+  private readonly defaultName: string = 'Ploni Almoni';
 
   name: string;
   greeting: string;
+  counter: number;
+  uptime1: string;
+  uptime2: string;
+  uptime3: Observable<string>;
+  uptime4: string;
 
-  constructor(private srv: HelloServiceService, private counter: CounterService) { }
+  private subscription2: Subscription;
+  private finish: Subject<void>;
+
+  constructor(private helloService: HelloServiceService, private counterService: CounterService) { }
 
   ngOnInit() {
     this.name = '';
+    this.greeting = '';
+    this.counter = this.counterService.current;
+    this.finish = new Subject<void>();
   }
 
-  greet()
-  {
-    this.counter.inc();
-    this.srv.greeting2(this.name).subscribe((msg: string ) => { this.displayGreet(msg) });
+  greet() {
+    let name = this.name || this.defaultName;
+
+    this.helloService.greeting(name).subscribe(value => {
+      this.greeting = value;
+    });
   }
 
-  displayGreet(message: string)
-  {
-    var c = this.counter.get();
-    this.greeting = message + " (" + c + ")";
+  next() {
+    this.counter = this.counterService.next();
   }
+
+  initUptime1() {
+    this.helloService.getUptime().pipe(takeUntil(this.finish)).subscribe(value => {
+      this.uptime1 = value
+    });
+  }
+
+  initUptime2() {
+    this.subscription2 = this.helloService.getUptime().subscribe(value => {
+      this.uptime2 = value
+    });
+  }
+
+  initUptime3() {
+    this.uptime3 = this.helloService.getUptime();
+  }
+
+  // memory leak!
+  initUptime4() {
+    this.helloService.getUptime().subscribe(value => {
+      this.uptime4 = value
+    });
+  }
+  
+  ngOnDestroy() {
+    this.finish.next();
+    
+    if (this.subscription2) {
+      this.subscription2.unsubscribe();
+    }
+  }
+
 }

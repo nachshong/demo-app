@@ -9,13 +9,12 @@ export class CounterService {
     this.value = 0;
   }
 
-  inc()
-  {
-    this.value++;
-  }
-
-  get()
-  {
+  get current() : number {
     return this.value;
   }
+
+  next(): number {
+    return ++this.value;
+  }
+
 }
