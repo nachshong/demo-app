@@ -26,6 +26,7 @@ export class AuthService {
       }
 
       subscriber.next(logon);
+      subscriber.complete();
     });
   }
 
