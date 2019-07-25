@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'books', component: BooksComponent },
   { path: 'hello-service', component: HelloServiceComponent },
   { path: 'posts', component: PostsComponent },
-  { path: 'posts-md', component: PostsMdComponent },
+  { path: 'posts/md', component: PostsMdComponent },
   { path: 'users/:id', component: UserDetailsComponent },
   { path: 'account', component: AccountComponent, canActivate: [AuthGuard] },
   { path: 'sanitizer', component: SanitizerComponent },

@@ -1,3 +1,9 @@
+div.ribbon {
+    display: flex; 
+    justify-content: space-between;
+    align-items: baseline;
+}
+
 div.filters input {
     width: 200px;
 }

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators';
 
-import { UrlService } from '../conf/url.service'
+import { UrlService } from '../common/url.service'
 import { Post } from './post'
 
 @Injectable({

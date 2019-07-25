@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { UrlService } from './url.service';
+import { SettingsService } from './settings.service';
 
-describe('UrlService', () => {
+describe('SettingsService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: UrlService = TestBed.get(UrlService);
+    const service: SettingsService = TestBed.get(SettingsService);
     expect(service).toBeTruthy();
   });
 });

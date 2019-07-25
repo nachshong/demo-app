@@ -17,7 +17,6 @@ export class NavBarComponent implements OnInit {
       { routerLink: ['/books'], text: 'Books' },
       { routerLink: ['/hello-service'], text: 'Hello Service' },
       { routerLink: ['/posts'], text: 'Posts' },
-      { routerLink: ['/posts-md'], text: 'Posts MD' },
       { routerLink: ['/account'], text: 'Account' },
     ];
   }

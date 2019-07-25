@@ -1,3 +1,9 @@
 label.disabled {
     color: gray;
 }
+span.up {
+    color: green;
+}
+span.down {
+    color: red;
+}

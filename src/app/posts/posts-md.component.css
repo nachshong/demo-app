@@ -1,3 +1,9 @@
+div.ribbon {
+    display: flex; 
+    justify-content: space-between;
+    align-items: baseline;
+}
+
 h4 {
     margin: 15px 0 10px;
 }

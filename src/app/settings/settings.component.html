@@ -3,5 +3,8 @@
 </p>
 <hr>
 <p>
-    <label [class.disabled]="!isLocalDbUp"><input type="checkbox" [(ngModel)]="isLocalDbInUse" [disabled]="!isLocalDbUp" /> Use local DB.</label>
+    <label><input type="checkbox" [(ngModel)]="useLocalDb" /> Use local DB</label>
+    <small *ngIf="isLocalDbUp===null"> (check status...)</small>
+    <span *ngIf="isLocalDbUp" class="up"> (up)</span>
+    <span *ngIf="isLocalDbUp===false" class="down"> (down)</span>
 </p>

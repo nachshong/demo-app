@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { UrlService } from '../conf/url.service';
+import { UrlService } from '../common/url.service';
+import { SettingsService } from './settings.service';
+import { timer, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-settings',
@@ -9,25 +11,31 @@ import { UrlService } from '../conf/url.service';
 })
 export class SettingsComponent implements OnInit {
 
+  private timerSubscription: Subscription;
+
   isLocalDbUp: boolean;
 
-  constructor(private urlService: UrlService) { 
-    this.isLocalDbUp = false;
+  constructor(private urlService: UrlService, private settingsService: SettingsService) { 
+    this.isLocalDbUp = null;
   }
 
   ngOnInit() {
-    this.urlService.checkLocalDb().subscribe(
-      () => { this.isLocalDbUp = true },
-      () => { this.isLocalDbUp = false }
-    );
+    this.timerSubscription = timer(0, 10000).subscribe(() => {
+      this.urlService.isLocalDbUp().subscribe(
+        (value) => { this.isLocalDbUp = value }
+      );
+    });
   }
 
-  get isLocalDbInUse(): boolean {
-    return this.urlService.useLocalDb;
+  ngOnDestroy() {
+    this.timerSubscription.unsubscribe();
   }
 
-  set isLocalDbInUse(value: boolean) {
-    this.urlService.useLocalDb = value;
+  get useLocalDb(): boolean {
+    return this.settingsService.useLocalDb;
   }
 
+  set useLocalDb(value: boolean) {
+    this.settingsService.useLocalDb = value;
+  }
 }
