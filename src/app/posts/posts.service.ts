@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { UrlService } from '../common/url.service'
 import { Post } from './post'
+import { User } from './user'
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,11 @@ export class PostsService {
   getPosts(): Observable<Array<Post>> {
     return this.httpClient.get<Array<any>>(this.urlService.baseURL + '/posts')
       .pipe(map(list => list.map(this.mapToLocalPost)));
+  }
+
+  getUsers(): Observable<Array<User>> {
+    return this.httpClient.get<Array<any>>(this.urlService.baseURL + '/users')
+      .pipe(map(list => list.map(s => new User(s.id, s.name))));
   }
 
   addPost(post: Post): Observable<Post> {
@@ -47,5 +53,4 @@ export class PostsService {
   {
     return this.httpClient.delete(this.urlService.baseURL + '/posts/' + id);
   }
-
 }

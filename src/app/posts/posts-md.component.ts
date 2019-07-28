@@ -3,11 +3,10 @@ import { NgForm, FormControl } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 import { map, startWith, first } from 'rxjs/operators'
 
+import { ByRefValue } from '../common/by-ref-value';
 import { PostsService } from './posts.service'
 import { Post } from './post'
-import { UsersService } from '../users/users.service';
-import { User } from '../users/user';
-import { ByRefValue } from '../common/by-ref-value';
+import { User } from './user';
 
 @Component({
   selector: 'app-posts-md',
@@ -25,7 +24,7 @@ export class PostsMdComponent implements OnInit {
   userFilterOptions: Observable<User[]>;
   total: ByRefValue<number>;
 
-  constructor(private postService: PostsService, private usersService: UsersService) { 
+  constructor(private postService: PostsService) { 
     this.posts = null;
     this.users = null;
     this.usersMap = null;
@@ -51,7 +50,7 @@ export class PostsMdComponent implements OnInit {
       dataGate.next();
     });
 
-    this.usersService.getUsers().subscribe(list => {
+    this.postService.getUsers().subscribe(list => {
       this.users = list;
       dataGate.next();
 

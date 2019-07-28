@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 import { Post } from './post'
-import { User } from '../users/user';
+import { User } from './user';
 
 @Pipe({
   name: 'postsFilter',

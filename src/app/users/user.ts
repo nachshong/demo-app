@@ -40,5 +40,4 @@ export class User {
     toString() {
         return this._name;
     }
-
 }

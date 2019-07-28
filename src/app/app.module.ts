@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { JwtModule } from '@auth0/angular-jwt';
 
@@ -49,11 +48,12 @@ import { HttpErrorInterceptor } from './http-error.interceptor';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    CommonModule,
     HttpClientModule,
+    AppMaterialModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: AuthService.getJWT,
@@ -61,8 +61,6 @@ import { HttpErrorInterceptor } from './http-error.interceptor';
         blacklistedRoutes: []
       }
     }),
-    BrowserAnimationsModule,
-    AppMaterialModule
   ],
   providers: [
     {

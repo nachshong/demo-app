@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { PostsService } from './posts.service'
 import { Post } from './post'
-import { UsersService } from '../users/users.service';
 
 @Component({
   selector: 'app-posts',
@@ -15,13 +14,13 @@ export class PostsComponent implements OnInit {
   users: Object;
   newPost: Post;
 
-  constructor(private postService: PostsService, private usersService: UsersService) { 
+  constructor(private postService: PostsService) { 
     this.users = new Object();
     this.newPost = new Post();
   }
 
   ngOnInit() {
-    this.usersService.getUsers().subscribe(
+    this.postService.getUsers().subscribe(
       list => { list.forEach(s => { this.users[s.id] = s}) }
     );
 

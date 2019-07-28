@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 
 import { User } from '../user';
 import { UsersService } from '../users.service'
-import { UrlService } from '../../common/url.service';
 
 @Component({
   selector: 'app-user-details',
@@ -14,18 +13,17 @@ export class UserDetailsComponent implements OnInit {
 
   user: User;
 
-  constructor(private usersService: UsersService, private urlService: UrlService, private route: ActivatedRoute) { 
+  constructor(private usersService: UsersService, private route: ActivatedRoute) { 
     this.user = new User();
   }
 
   ngOnInit() {
-    this.route.params.subscribe(prms => { 
-        var userId = Number.parseInt(prms['id']);
+    this.route.params.subscribe(params => { 
+        var userId = Number.parseInt(params['id']);
         this.usersService.getUser(userId).subscribe(
-          s => this.user = s
+          value => this.user = value
         );
     });
-
 
     // var userId = Number.parseInt(this.route.snapshot.params['id']);
 
@@ -33,5 +31,4 @@ export class UserDetailsComponent implements OnInit {
     //   user => this.user = user
     // );
   }
-
 }
