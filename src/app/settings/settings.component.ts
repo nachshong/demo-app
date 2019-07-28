@@ -38,4 +38,8 @@ export class SettingsComponent implements OnInit {
   set useLocalDb(value: boolean) {
     this.settingsService.useLocalDb = value;
   }
+
+  raiseError() {
+    throw new Error("SettingsComponent raised an error.");
+  }
 }
