@@ -4,6 +4,7 @@ import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators';
 
 import { UrlService } from '../common/url.service'
+import { CounterService } from '../common/counter.service';
 import { User } from './user'
 
 @Injectable({
@@ -11,7 +12,11 @@ import { User } from './user'
 })
 export class UsersService {
 
-  constructor(private httpClient: HttpClient, private urlService: UrlService) { }
+  counter: CounterService;
+
+  constructor(private httpClient: HttpClient, private urlService: UrlService) {
+    this.counter = new CounterService();
+   }
 
   private mapToLocalUser(user: any): User {
     return new User(user.id, user.name, user.username, user.email, user.phone);

@@ -3,10 +3,6 @@ div.account {
     font-size: small;
 }
 
-a {
-    color: black;
-}
-
 a.active {
     font-style: oblique;
     font-weight: bold;

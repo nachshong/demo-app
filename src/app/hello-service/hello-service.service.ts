@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, timer, interval } from 'rxjs';
+import { Observable, timer } from 'rxjs';
 import { map, mapTo, startWith } from 'rxjs/operators';
+
+import { UptimeService } from '../common/uptime.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,11 +10,9 @@ import { map, mapTo, startWith } from 'rxjs/operators';
 export class HelloServiceService {
 
   private counter: number;
-  private start: number;
 
-  constructor() { 
+  constructor(private uptimeService: UptimeService) { 
     this.counter = 0;
-    this.start = Date.now();
   }
 
   greeting(name: string): Observable<string> {
@@ -21,8 +21,8 @@ export class HelloServiceService {
   }
 
   getUptime(): Observable<string>{
-    return interval(1000).pipe(
-      map(() => formatUptime(Date.now() - this.start)),
+    return this.uptimeService.getUptime().pipe(
+      map(uptime => formatUptime(uptime)),
       startWith('loading...')
     );
   }

@@ -9,7 +9,3 @@ nav a.active {
     text-decoration: none;
     pointer-events: none;
 }
-
-nav a {
-    color: black;
-}

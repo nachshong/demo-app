@@ -16,5 +16,4 @@ export class CounterService {
   next(): number {
     return ++this.value;
   }
-
 }

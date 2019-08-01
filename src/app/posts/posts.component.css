@@ -2,6 +2,7 @@ div.ribbon {
     display: flex; 
     justify-content: space-between;
     align-items: baseline;
+    margin: -8px 0;
 }
 
 div.filters input {
@@ -32,8 +33,4 @@ div.actions {
     padding: 0 30px;
     display: flex;
     justify-content: space-between;
-}
-
-a {
-    color: black;
 }

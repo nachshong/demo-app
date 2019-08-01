@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
+import { CounterService } from '../common/counter.service';
 import { HelloServiceService } from './hello-service.service';
-import { CounterService } from './counter.service';
 
 @Component({
   selector: 'app-hello-service',

@@ -5,7 +5,7 @@
 <div>
   <input [(ngModel)]="name"><button (click)="greet()">Hello</button>
   <p>
-    {{greeting}}<br>
+    {{greeting || '- - -'}}
   </p>
 </div>
 <hr>

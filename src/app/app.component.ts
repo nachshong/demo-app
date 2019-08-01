@@ -1,5 +1,7 @@
 import { Component, VERSION } from '@angular/core';
 
+import { UptimeService } from './common/uptime.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,4 +10,8 @@ import { Component, VERSION } from '@angular/core';
 export class AppComponent {
   title = 'The Open Univeristy of Israel';
   version = VERSION.full;
+
+  constructor(private uptimeService: UptimeService) {
+    uptimeService.applicationStart();
+  }
 }

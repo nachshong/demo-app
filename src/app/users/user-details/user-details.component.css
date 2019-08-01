@@ -1,0 +1,19 @@
+.ribbon {
+    display: flex; 
+    justify-content: space-between;
+    align-items: baseline;
+    margin: -8px 0;
+}
+
+a.active {
+    font-weight: bold;
+    text-decoration: none;
+    pointer-events: none;
+}
+
+.links-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 0 15px;
+}

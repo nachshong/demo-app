@@ -12,23 +12,20 @@ import { UsersService } from '../users.service'
 export class UserDetailsComponent implements OnInit {
 
   user: User;
+  counter: number;
 
   constructor(private usersService: UsersService, private route: ActivatedRoute) { 
     this.user = new User();
   }
 
   ngOnInit() {
+    this.counter = this.usersService.counter.next();
+
     this.route.params.subscribe(params => { 
         var userId = Number.parseInt(params['id']);
         this.usersService.getUser(userId).subscribe(
           value => this.user = value
         );
     });
-
-    // var userId = Number.parseInt(this.route.snapshot.params['id']);
-
-    // this.usersService.getUser(userId).subscribe(
-    //   user => this.user = user
-    // );
   }
 }
