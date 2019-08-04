@@ -24,7 +24,7 @@ export class HelloServiceComponent implements OnInit, OnDestroy {
   uptime4: string;
 
   private subscription2: Subscription;
-  private finish: Subject<void>;
+  private dispose: Subject<void>;
 
   constructor(private helloService: HelloServiceService, private counterService: CounterService) { }
 
@@ -32,9 +32,9 @@ export class HelloServiceComponent implements OnInit, OnDestroy {
     this.name = '';
     this.greeting = '';
     this.counter = this.counterService.current;
-    this.finish = new Subject<void>();
+    this.dispose = new Subject<void>();
   }
-
+    
   greet() {
     let name = this.name || this.defaultName;
 
@@ -48,7 +48,7 @@ export class HelloServiceComponent implements OnInit, OnDestroy {
   }
 
   initUptime1() {
-    this.helloService.getUptime().pipe(takeUntil(this.finish)).subscribe(value => {
+    this.helloService.getUptime().pipe(takeUntil(this.dispose)).subscribe(value => {
       this.uptime1 = value
     });
   }
@@ -69,13 +69,12 @@ export class HelloServiceComponent implements OnInit, OnDestroy {
       this.uptime4 = value
     });
   }
-  
+
   ngOnDestroy() {
-    this.finish.next();
+    this.dispose.next();
     
     if (this.subscription2) {
       this.subscription2.unsubscribe();
     }
   }
-
 }

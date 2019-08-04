@@ -1,6 +1,6 @@
 import { Component, VERSION } from '@angular/core';
 
-import { UptimeService } from './common/uptime.service';
+import { TimeService } from './common/time.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,7 @@ export class AppComponent {
   title = 'The Open Univeristy of Israel';
   version = VERSION.full;
 
-  constructor(private uptimeService: UptimeService) {
-    uptimeService.applicationStart();
+  constructor(private timeService: TimeService) {
+    timeService.applicationStart();
   }
 }
