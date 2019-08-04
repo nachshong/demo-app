@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { timer, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { timer, Observable, defer } from 'rxjs';
+import { map, refCount, share } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 export class UptimeService {
 
   private _start: number;
+  private _inner: Observable<number>;
 
   constructor() { }
 
@@ -16,11 +17,14 @@ export class UptimeService {
   }
 
   getUptime(): Observable<number> {
-    var now: Date = new Date(Date.now());
-    var dueTime: number = (1000 - now.getMilliseconds()) + 1000;
-
-    return timer(dueTime, 1000).pipe(
-      map(() => Date.now() - this._start)
-    );
+    return this._inner || (this._inner = defer(() => {
+      var now: Date = new Date(Date.now());
+      var dueTime: number = (1000 - now.getMilliseconds()) + 1000;
+      console.log('new timer created.');
+      return timer(dueTime, 1000);
+    }).pipe(
+      map(() => Date.now() - this._start),
+      share()
+    ));
   }
 }
