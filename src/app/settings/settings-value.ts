@@ -1,7 +1,12 @@
 export class SettingsValue<T> {
     private value: T;
 
-    constructor(private key: string, private defaultValue: T = null) {
+    constructor(private key: string, private defaultValue: T = null, private publisher?: (value: T) => void) {
+    }
+
+    init() {
+        var value = this.get();
+        this.publisher(value);
     }
 
     get(): T {
@@ -33,5 +38,13 @@ export class SettingsValue<T> {
             sessionStorage.setItem(this.key, JSON.stringify(value));
             this.value = value;
         }
+
+        if (this.publisher) {
+            this.publisher(this.value);
+        }
+    }
+
+    isDefault(): boolean {
+        return this.value === this.defaultValue;
     }
 }

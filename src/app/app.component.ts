@@ -1,6 +1,7 @@
 import { Component, VERSION } from '@angular/core';
 
 import { TimeService } from './common/time.service';
+import { SettingsService } from './settings/settings.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,8 @@ export class AppComponent {
   title = 'The Open Univeristy of Israel';
   version = VERSION.full;
 
-  constructor(private timeService: TimeService) {
+  constructor(timeService: TimeService, settingsService: SettingsService ) {
     timeService.applicationStart();
+    settingsService.applicationStart();
   }
 }

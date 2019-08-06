@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
-import { UrlService } from '../common/url.service';
 import { SettingsService } from './settings.service';
-import { timer, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-settings',
@@ -10,25 +9,27 @@ import { timer, Subscription } from 'rxjs';
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit {
-
-  private timerSubscription: Subscription;
+  private subscriptions: Subscription[];
 
   isLocalDbUp: boolean;
 
-  constructor(private urlService: UrlService, private settingsService: SettingsService) { 
+  constructor(private settingsService: SettingsService) { 
     this.isLocalDbUp = null;
+    this.subscriptions = [];
   }
 
   ngOnInit() {
-    this.timerSubscription = timer(0, 10000).subscribe(() => {
-      this.urlService.isLocalDbUp().subscribe(
-        (value) => { this.isLocalDbUp = value }
-      );
+    var sub = this.settingsService.isLocalDbUp().subscribe(value => {
+      this.isLocalDbUp = value;
     });
+
+    this.subscriptions.push(sub);
   }
 
   ngOnDestroy() {
-    this.timerSubscription.unsubscribe();
+    this.subscriptions.forEach(item => {
+      item.unsubscribe();
+    });
   }
 
   get useLocalDb(): boolean {
@@ -37,6 +38,14 @@ export class SettingsComponent implements OnInit {
 
   set useLocalDb(value: boolean) {
     this.settingsService.useLocalDb = value;
+  }
+
+  get logOnTimerTick(): number {
+    return this.settingsService.logOnTimerTick;
+  }
+
+  set logOnTimerTick(value: number) {
+    this.settingsService.logOnTimerTick = value;
   }
 
   raiseError() {

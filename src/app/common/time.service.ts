@@ -6,10 +6,10 @@ import { map, share, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class TimeService {
+  static logTimerTick: number = 0;
 
   private _start: number;
   private _innerTimer: Observable<number>;
-  private _logTick: number = 0;
 
   constructor() { 
     this._innerTimer = defer(() => {
@@ -19,21 +19,13 @@ export class TimeService {
       console.log(`A new timer created at ${now.toISOString()} with due time of ${dueTime}.`);
       return t;
     }).pipe(
-      tap(i => { this._logTick && (i % this._logTick == 0) && console.log(`timer tick ${i}`) }),
+      tap(i => { TimeService.logTimerTick && (i % TimeService.logTimerTick == 0) && console.log(`timer tick ${i}`) }),
       share()
     );
   }
 
   applicationStart() {
     this._start = Date.now();
-  }
-
-  get logOnTimerTick(): number {
-    return this._logTick;
-  }
-
-  set logOnTimerTick(value: number) {
-    this._logTick = value;
   }
 
   getTime(): Observable<number> {
