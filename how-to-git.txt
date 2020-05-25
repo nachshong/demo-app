@@ -17,6 +17,10 @@ git reset --hard origin/master
 #set upstream (it seted automatically when repo is cloned)
 git branch -u origin/master
 
+#upload local repo to an empty repo on the server
+git remote add origin https://github.com/nachshong/demo-app
+git push -u origin --all
+
 # list of branches
 git branch
 - or - (show hash and subject)
